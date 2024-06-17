@@ -36,3 +36,19 @@
   align-items: center;
   font-size: 2rem;
 }
+
+.comment-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comment-card {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.comment-card p {
+  margin: 5px 0;
+}
