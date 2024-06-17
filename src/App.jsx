@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Topic from './components/home-components/TopicArticles';
+import ArticlePage from './components/ArticlePage';
 
 function App() {
   const [user, setUser] = useState({});
@@ -26,6 +27,7 @@ function App() {
             element={<Topic topic={topic.slug} />}
           />
         ))}
+        <Route path="/articles/:article_id" element={<ArticlePage />} />
       </Routes>
     </BrowserRouter>
   );
