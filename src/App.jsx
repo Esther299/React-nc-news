@@ -1,32 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Topic from './components/home-components/TopicArticles';
 import ArticlePage from './components/articlePage-components/ArticlePage';
+import { getTopics } from './api';
 
 function App() {
   const [user, setUser] = useState({});
   const [articles, setArticles] = useState([]);
   const [topics, setTopics] = useState([]);
+  useEffect(() => {
+    getTopics()
+      .then((fetchedTopics) => {
+        setTopics(fetchedTopics);
+      })
+      .catch((err) => {
+        console.error('Error fetching topics:', err);
+      });
+  }, []);
+
   return (
     <BrowserRouter>
       <Header user={user} />
       <Navbar topics={topics} setTopics={setTopics} />
       <Routes>
         <Route
-          path="/"
+          path="/:topic?"
           element={<Home articles={articles} setArticles={setArticles} />}
         />
-        {topics.map((topic) => (
-          <Route
-            key={topic.slug}
-            path={`/${topic.slug}`}
-            element={<Topic topic={topic.slug} />}
-          />
-        ))}
         <Route path="/articles/:article_id" element={<ArticlePage />} />
       </Routes>
     </BrowserRouter>

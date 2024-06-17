@@ -27,3 +27,10 @@ export const getCommentsByArticleId = (article_id) => {
     return data.comments;
   });
 };
+
+export const patchArticleById = (article_id) => {
+  const patchBody = { inc_votes: 1 };
+  return newsApi.patch(`/articles/${article_id}`, patchBody).then(({ data }) => {
+    return data.article;
+  });
+};
