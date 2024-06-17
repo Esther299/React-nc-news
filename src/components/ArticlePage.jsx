@@ -4,9 +4,9 @@ import {
   getArticleById,
   getCommentsByArticleId,
   patchArticleById,
-} from '../../api';
+} from '../api';
 import './ArticlePage.css';
-import Comments from './Comments';
+import Comments from './articlePage-components/Comments';
 import { Link } from 'react-router-dom';
 
 const ArticlePage = () => {
@@ -29,7 +29,7 @@ const ArticlePage = () => {
     getCommentsByArticleId(article_id)
       .then((fetchedComments) => {
         setComments(fetchedComments);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((err) => {
         console.error('Error fetching comments:', err);
@@ -61,7 +61,8 @@ const ArticlePage = () => {
       <img src={article.article_img_url} alt={article.title} />
       <h3>By {article.author}</h3>
       <p className="substring">
-        Published: {article.created_at.substring(0, 10)} at {article.created_at.substring(11, 19)}
+        Published: {article.created_at.substring(0, 10)} at{' '}
+        {article.created_at.substring(11, 19)}
       </p>
       <div className="vote-section">
         <p>Add likes:</p>
@@ -71,7 +72,7 @@ const ArticlePage = () => {
         </button>
       </div>
       <hr />
-      <Comments comments={comments} />
+      <Comments comments={comments} setComments={setComments} articleId={article.article_id} />
       <hr />
       <Link className="link" to={`/`}>
         <button>Home</button>
