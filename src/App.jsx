@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import ArticlePage from './components/articlePage-components/ArticlePage';
+import ArticlePage from './components/ArticlePage';
 import { getTopics } from './api';
 
 function App() {

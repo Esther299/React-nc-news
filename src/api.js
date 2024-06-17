@@ -30,7 +30,18 @@ export const getCommentsByArticleId = (article_id) => {
 
 export const patchArticleById = (article_id) => {
   const patchBody = { inc_votes: 1 };
-  return newsApi.patch(`/articles/${article_id}`, patchBody).then(({ data }) => {
-    return data.article;
-  });
+  return newsApi
+    .patch(`/articles/${article_id}`, patchBody)
+    .then(({ data }) => {
+      return data.article;
+    });
+};
+
+export const postComment = (article_id, { author, body }) => {
+  return newsApi
+    .post(`/articles/${article_id}/comments`, { author, body })
+    .then(({ data }) => {
+      console.log(data);
+      return data.comment;
+    });
 };
