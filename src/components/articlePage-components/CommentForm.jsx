@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { postComment } from '../../api';
 
-function CommentForm({ articleId, setComments }) {
+function CommentForm({ articleId, setComments,selectedUser }) {
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
-    postComment(articleId, { author, body })
+    postComment(articleId, { selectedUser, body })
       .then((newComment) => {
         setComments((currentComments) => [...currentComments, newComment]);
         setAuthor('');

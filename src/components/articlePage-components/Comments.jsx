@@ -1,11 +1,10 @@
 import CommentForm from './CommentForm';
 
-function Comments({ articleId, comments, setComments }) {
+function Comments({ articleId, comments, setComments, selectedUser }) {
   return (
     <div className="comments">
       <h3>Comments</h3>
       <ul className="comment-list">
-        {/* {console.log(comments)} */}
         {comments.map((comment) => (
           <li key={comment.comment_id} className="comment-card">
             <p>{comment.body}</p>
@@ -19,7 +18,11 @@ function Comments({ articleId, comments, setComments }) {
         ))}
       </ul>
       <div className="comment-form">
-        <CommentForm setComments={setComments} articleId={articleId} />
+        <CommentForm
+          setComments={setComments}
+          articleId={articleId}
+          selectedUser={selectedUser}
+        />
       </div>
     </div>
   );
