@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Topic from './components/home-components/TopicArticles';
-import ArticlePage from './components/ArticlePage';
+import ArticlePage from './components/articlePage-components/ArticlePage';
 
 function App() {
   const [user, setUser] = useState({});
