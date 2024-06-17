@@ -1,0 +1,38 @@
+.article {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.article h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.article p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.article img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.article h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.article p.substring {
+  font-size: 1.2rem;
+  color: #777;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
