@@ -14,40 +14,39 @@ const ArticlePage = ({ selectedUser }) => {
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
-    getArticleById(article_id)
-      .then((fetchedArticle) => {
+    Promise.all([
+      getArticleById(article_id),
+      getCommentsByArticleId(article_id),
+    ])
+      .then(([fetchedArticle, fetchedComments]) => {
         setArticle(fetchedArticle);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error('Error fetching article:', err);
-        setIsLoading(false);
-      });
-
-    getCommentsByArticleId(article_id)
-      .then((fetchedComments) => {
         setComments(fetchedComments);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.error('Error fetching comments:', err);
+        console.error('Error fetching article or/and its comments:', err);
         setIsLoading(false);
       });
   }, [article_id]);
 
   const upVote = (article_id) => {
-    setArticle((currentArticle) => ({
+    if (!hasVoted) {
+      setArticle((currentArticle) => ({
       ...currentArticle,
       votes: currentArticle.votes + 1,
     }));
 
     patchArticleById(article_id)
-      .then(() => {})
+      .then(() => {
+        setHasVoted(true)
+      })
       .catch((err) => {
         console.error('Error upvoting article:', err);
       });
+    }
   };
 
   if (isLoading) {
