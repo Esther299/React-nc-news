@@ -1,6 +1,22 @@
+import { useState } from 'react';
 import CommentForm from './CommentForm';
+import { deleteCommentById } from '../../api.js';
 
 function Comments({ articleId, comments, setComments, selectedUser }) {
+
+  const handleDelete = (comment_id) => {
+    deleteCommentById(comment_id)
+      .then(() => {
+        setComments((currentComments) =>
+          currentComments.filter((comment) => comment.comment_id !== comment_id)
+        );
+      })
+      .catch((err) => {
+        console.error('Error deleting comment:', err);
+      });
+  };
+
+
   return (
     <div className="comments">
       <h3>Comments</h3>
@@ -21,6 +37,11 @@ function Comments({ articleId, comments, setComments, selectedUser }) {
               {comment.created_at.substring(11, 19)}
             </p>
             <p>Likes: {comment.votes}</p>
+            {selectedUser && selectedUser.username === comment.author && (
+              <button onClick={() => handleDelete(comment.comment_id)}>
+                Delete
+              </button>
+            )}
           </li>
         ))}
       </ul>
