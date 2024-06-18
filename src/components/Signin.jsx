@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const SignIn = ({ users, setSelectedUser }) => {
   const [currUser, setCurrUser] = useState('');
   const [viewUser, setViewUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleChange = (event) => {
     const username = event.target.value;
@@ -25,14 +26,20 @@ const SignIn = ({ users, setSelectedUser }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (currUser) {
+    if (viewUser) {
       setSelectedUser(viewUser);
+      setIsLoggedIn(true);
     } else {
       setSelectedUser(null);
+      setIsLoggedIn(false);
     }
   };
 
-  return (
+  return isLoggedIn ? (
+    <Link className="link" to={`/profile`}>
+      <button>See Profile</button>
+    </Link>
+  ) : (
     <div className="signin-container">
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
