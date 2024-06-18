@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getTopics } from '../api';
 
-function Navbar({ topics, setTopics }) {
+function Navbar() {
+  const [topics, setTopics] = useState([]);
   useEffect(() => {
     getTopics()
       .then((fetchedTopics) => {
@@ -14,7 +15,7 @@ function Navbar({ topics, setTopics }) {
   }, []);
 
   return (
-    <nav className='navbar'>
+    <nav className="navbar">
       <ul>
         <li>
           <Link className="link" to="/">

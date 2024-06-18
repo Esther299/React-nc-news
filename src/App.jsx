@@ -13,17 +13,9 @@ function App() {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [articles, setArticles] = useState([]);
-  const [topics, setTopics] = useState([]);
   
 
   useEffect(() => {
-    getTopics()
-      .then((fetchedTopics) => {
-        setTopics(fetchedTopics);
-      })
-      .catch((err) => {
-        console.error('Error fetching topics:', err);
-      });
     getUsers()
       .then((fetchedUsers) => {
         setUsers(fetchedUsers);
@@ -36,7 +28,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
-      <Navbar topics={topics} setTopics={setTopics} />
+      <Navbar />
       <Routes>
         <Route
           path="/:topic?"

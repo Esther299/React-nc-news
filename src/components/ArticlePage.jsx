@@ -17,6 +17,7 @@ const ArticlePage = ({ selectedUser }) => {
   const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true)
     Promise.all([
       getArticleById(article_id),
       getCommentsByArticleId(article_id),

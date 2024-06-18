@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Article from './Article';
 
 function Articles({ articles }) {
