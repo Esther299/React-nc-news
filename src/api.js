@@ -45,3 +45,15 @@ export const postComment = (article_id, { author, body }) => {
       return data.comment;
     });
 };
+
+export const getUsers = () => {
+  return newsApi.get('/users').then(({ data }) => {
+    return data.users;
+  });
+};
+
+export const getUserByUsername = (username) => {
+  return newsApi.get(`/users/${username}`).then(({ data }) => {
+    return data.user;
+  });
+};

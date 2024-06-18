@@ -57,7 +57,7 @@
   margin-top: 20px;
 }
 
-.vote-section button {
+button {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -66,9 +66,10 @@
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  margin: 1vw;
 }
 
-.vote-section button:hover {
+button:hover {
   background-color: #0056b3;
 }
 
@@ -91,17 +92,4 @@
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-}
-
-.comment-form button {
-  align-self: flex-start;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.comment-form button:hover {
-  background-color: #0056b3;
 }

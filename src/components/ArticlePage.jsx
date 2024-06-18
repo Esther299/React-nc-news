@@ -9,31 +9,31 @@ import './ArticlePage.css';
 import Comments from './articlePage-components/Comments';
 import { Link } from 'react-router-dom';
 
-const ArticlePage = () => {
+const ArticlePage = ({ selectedUser }) => {
   const { article_id } = useParams();
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getArticleById(article_id)
       .then((fetchedArticle) => {
         setArticle(fetchedArticle);
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.error('Error fetching article:', err);
-        setLoading(false);
+        setIsLoading(false);
       });
 
     getCommentsByArticleId(article_id)
       .then((fetchedComments) => {
         setComments(fetchedComments);
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.error('Error fetching comments:', err);
-        setLoading(false);
+        setIsLoading(false);
       });
   }, [article_id]);
 
@@ -50,7 +50,7 @@ const ArticlePage = () => {
       });
   };
 
-  if (loading) {
+  if (isLoading) {
     return <p className="loading">Loading...</p>;
   }
 
@@ -72,7 +72,12 @@ const ArticlePage = () => {
         </button>
       </div>
       <hr />
-      <Comments comments={comments} setComments={setComments} articleId={article.article_id} />
+      <Comments
+        comments={comments}
+        setComments={setComments}
+        articleId={article.article_id}
+        selectedUser={selectedUser}
+      />
       <hr />
       <Link className="link" to={`/`}>
         <button>Home</button>

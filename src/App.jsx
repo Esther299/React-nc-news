@@ -5,12 +5,16 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import ArticlePage from './components/ArticlePage';
-import { getTopics } from './api';
+import { getTopics, getUsers } from './api';
+import SignIn from './components/Signin';
+import ProfilePage from './components/ProfilePage';
 
 function App() {
-  const [user, setUser] = useState({});
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [articles, setArticles] = useState([]);
   const [topics, setTopics] = useState([]);
+
   useEffect(() => {
     getTopics()
       .then((fetchedTopics) => {
@@ -19,18 +23,41 @@ function App() {
       .catch((err) => {
         console.error('Error fetching topics:', err);
       });
+    getUsers()
+      .then((fetchedUsers) => {
+        setUsers(fetchedUsers);
+      })
+      .catch((err) => {
+        console.error('Error fetching users:', err);
+      });
   }, []);
 
   return (
     <BrowserRouter>
-      <Header user={user} />
+      <Header selectedUser={selectedUser} />
       <Navbar topics={topics} setTopics={setTopics} />
       <Routes>
         <Route
           path="/:topic?"
           element={<Home articles={articles} setArticles={setArticles} />}
         />
-        <Route path="/articles/:article_id" element={<ArticlePage />} />
+        <Route
+          path="/signin"
+          element={
+            <SignIn
+              users={users}
+              setSelectedUser={setSelectedUser}
+            />
+          }
+        />
+        <Route
+          path="/profile"
+          element={<ProfilePage selectedUser={selectedUser} />}
+        />
+        <Route
+          path="/articles/:article_id"
+          element={<ArticlePage selectedUser={selectedUser} />}
+        />
       </Routes>
     </BrowserRouter>
   );

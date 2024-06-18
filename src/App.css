@@ -56,7 +56,7 @@ li {
   background-color: #fff;
 }
 
-img {
+.article-img {
   max-width: 100%;
   height: auto;
   margin-bottom: 1rem;
@@ -65,3 +65,9 @@ img {
 p {
   margin: 0.5rem 0;
 }
+
+.selected-user-container {
+ width: 60%;
+ margin: auto;
+}
+

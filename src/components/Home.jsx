@@ -21,6 +21,10 @@ function Home({ articles, setArticles }) {
       });
   }, [topic]);
 
+if (isLoading) {
+  return <p className="loading">Loading...</p>;
+}
+  
   return (
     <main>
       <h1>All the {topic} articles here:</h1>
