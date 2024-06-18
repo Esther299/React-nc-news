@@ -21,8 +21,7 @@ function Comments({ articleId, comments, setComments, selectedUser }) {
           setDeleteMessage('');
         }, 5000);
       })
-      .catch((err) => {
-        console.error('Error deleting comment:', err);
+      .catch(() => {
         setError('Failed to delete the comment. Try again.');
         setIsDeleting(false);
       });

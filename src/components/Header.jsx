@@ -7,13 +7,11 @@ function Header({ selectedUser, setSelectedUser }) {
   return (
     <header>
       <h1>NC News</h1>
+      <Link to="/profile">
+        <button>Your Profile</button>
+      </Link>
       {selectedUser ? (
-        <>
-          <Link to="/profile">
-            <button>Your Profile</button>
-          </Link>
-          <button onClick={handleLogout}>Log out</button>
-        </>
+        <button onClick={handleLogout}>Log out</button>
       ) : (
         <Link to="/signin">
           <button>Sign in</button>

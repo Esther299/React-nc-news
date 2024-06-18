@@ -18,8 +18,7 @@ function CommentForm({ articleId, setComments, selectedUser }) {
           setBody('');
           setIsSubmitting(false)
         })
-        .catch((err) => {
-          console.error('Error posting comment:', err);
+        .catch(() => {
           setError('Failed to post the comment. Try again.');
           setIsSubmitting(false)
         });
