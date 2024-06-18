@@ -14,6 +14,7 @@ function App() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [articles, setArticles] = useState([]);
   const [topics, setTopics] = useState([]);
+  
 
   useEffect(() => {
     getTopics()
@@ -34,7 +35,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header selectedUser={selectedUser} />
+      <Header selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
       <Navbar topics={topics} setTopics={setTopics} />
       <Routes>
         <Route
