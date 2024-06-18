@@ -3,23 +3,35 @@ import CommentForm from './CommentForm';
 import { deleteCommentById } from '../../api.js';
 
 function Comments({ articleId, comments, setComments, selectedUser }) {
+  const [deleteMessage, setDeleteMessage] = useState('');
+  const [error, setError] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = (comment_id) => {
+    setError(null);
+    setComments((currentComments) =>
+      currentComments.filter((comment) => comment.comment_id !== comment_id)
+    );
+    setIsDeleting(true);
     deleteCommentById(comment_id)
       .then(() => {
-        setComments((currentComments) =>
-          currentComments.filter((comment) => comment.comment_id !== comment_id)
-        );
+        setIsDeleting(false);
+        setDeleteMessage('Comment deleted successfully!');
+        setTimeout(() => {
+          setDeleteMessage('');
+        }, 5000);
       })
       .catch((err) => {
         console.error('Error deleting comment:', err);
+        setError('Failed to delete the comment. Try again.');
+        setIsDeleting(false);
       });
   };
-
 
   return (
     <div className="comments">
       <h3>Comments</h3>
+      {deleteMessage && <p className="delete-message">{deleteMessage}</p>}
       <div className="comment-form">
         <CommentForm
           setComments={setComments}
@@ -38,9 +50,15 @@ function Comments({ articleId, comments, setComments, selectedUser }) {
             </p>
             <p>Likes: {comment.votes}</p>
             {selectedUser && selectedUser.username === comment.author && (
-              <button onClick={() => handleDelete(comment.comment_id)}>
-                Delete
-              </button>
+              <>
+                <button
+                  onClick={() => handleDelete(comment.comment_id)}
+                  disabled={isDeleting}
+                >
+                  {isDeleting ? 'Deleting...' : 'Delete'}
+                </button>
+                {error && <p>{error}</p>}
+              </>
             )}
           </li>
         ))}
