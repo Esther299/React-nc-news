@@ -9,7 +9,7 @@ import './ArticlePage.css';
 import Comments from './articlePage-components/Comments';
 import { Link } from 'react-router-dom';
 
-const ArticlePage = (selectedUser) => {
+const ArticlePage = ({ selectedUser }) => {
   const { article_id } = useParams();
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);

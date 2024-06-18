@@ -1,20 +1,32 @@
 import { getUserByUsername } from '../api';
+import './Signin.css';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Signin.css'
-import Profile from './signin-components/Profile';
 
-const SignIn = ({ users, setSelectedUser, selectedUser }) => {
+const SignIn = ({ users, setSelectedUser }) => {
+  const [currUser, setCurrUser] = useState('');
+  const [viewUser, setViewUser] = useState(null);
 
-  const handleUserSelect = (event) => {
+  const handleChange = (event) => {
     const username = event.target.value;
+    setCurrUser(username);
     if (username) {
       getUserByUsername(username)
         .then((fetchedUser) => {
-          setSelectedUser(fetchedUser);
+          setViewUser(fetchedUser);
         })
         .catch((error) => {
           console.error('Error fetching user:', error);
         });
+    } else {
+      setViewUser(null);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (currUser) {
+      setSelectedUser(viewUser);
     } else {
       setSelectedUser(null);
     }
@@ -23,11 +35,11 @@ const SignIn = ({ users, setSelectedUser, selectedUser }) => {
   return (
     <div className="signin-container">
       <h2>Sign In</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <select
           className="user-select"
-          value={selectedUser ? selectedUser.username : ''}
-          onChange={handleUserSelect}
+          value={currUser}
+          onChange={handleChange}
         >
           <option value={''}>Select a user</option>
           {users.map((user) => (
@@ -36,11 +48,25 @@ const SignIn = ({ users, setSelectedUser, selectedUser }) => {
             </option>
           ))}
         </select>
-        <Link to={`/`}>
-          <button type="submit">Sign in</button>
-        </Link>
+
+        <button type="submit">Sign in</button>
       </form>
-      <Profile selectedUser={selectedUser} />
+      {viewUser && (
+        <div className="selected-user">
+          <h3>Selected User</h3>
+          <p>Username: {viewUser.username}</p>
+          <p>Name: {viewUser.name}</p>
+          <img
+            className="user-image"
+            src={viewUser.avatar_url}
+            alt={`${viewUser.username}'s avatar`}
+          />
+        </div>
+      )}
+      <hr />
+      <Link className="link" to={`/`}>
+        <button>Home</button>
+      </Link>
     </div>
   );
 };

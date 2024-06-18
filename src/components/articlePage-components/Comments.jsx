@@ -4,6 +4,13 @@ function Comments({ articleId, comments, setComments, selectedUser }) {
   return (
     <div className="comments">
       <h3>Comments</h3>
+      <div className="comment-form">
+        <CommentForm
+          setComments={setComments}
+          articleId={articleId}
+          selectedUser={selectedUser}
+        />
+      </div>
       <ul className="comment-list">
         {comments.map((comment) => (
           <li key={comment.comment_id} className="comment-card">
@@ -17,13 +24,6 @@ function Comments({ articleId, comments, setComments, selectedUser }) {
           </li>
         ))}
       </ul>
-      <div className="comment-form">
-        <CommentForm
-          setComments={setComments}
-          articleId={articleId}
-          selectedUser={selectedUser}
-        />
-      </div>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import Home from './components/Home';
 import ArticlePage from './components/ArticlePage';
 import { getTopics, getUsers } from './api';
 import SignIn from './components/Signin';
-import Profile from './components/signin-components/Profile';
+import ProfilePage from './components/ProfilePage';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -47,13 +47,12 @@ function App() {
             <SignIn
               users={users}
               setSelectedUser={setSelectedUser}
-              selectedUser={selectedUser}
             />
           }
         />
         <Route
           path="/profile"
-          element={<Profile selectedUser={selectedUser} />}
+          element={<ProfilePage selectedUser={selectedUser} />}
         />
         <Route
           path="/articles/:article_id"
