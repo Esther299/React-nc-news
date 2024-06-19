@@ -1,6 +1,9 @@
 import styles from './ProfilePage.module.css';
+import { UserContext } from '../../contexts/UserContext';
+import { useContext } from 'react';
 
-function ProfilePage({ selectedUser }) {
+function ProfilePage() {
+  const { selectedUser } = useContext(UserContext);
   if (selectedUser) {
     return (
       <div className={styles.profile}>

@@ -1,16 +1,25 @@
 import { getUserByUsername } from '../../api';
 import './Signin.module.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Signin.module.css';
+import { UserContext } from '../../contexts/UserContext';
 
-const SignIn = ({ users, setSelectedUser, isLoggedIn, setIsLoggedIn }) => {
+const SignIn = ({ users }) => {
+  const {
+    isLoading,
+    setIsLoading,
+    errorMsg,
+    setErrorMsg,
+    errorCode,
+    setErrorCode,
+    isLoggedIn,
+    setIsLoggedIn,
+    setSelectedUser,
+  } = useContext(UserContext);
+
   const [currUser, setCurrUser] = useState('');
   const [viewUser, setViewUser] = useState(null);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [errorCode, setErrorCode] = useState(null);
 
   const handleChange = (event) => {
     const username = event.target.value;
@@ -43,7 +52,6 @@ const SignIn = ({ users, setSelectedUser, isLoggedIn, setIsLoggedIn }) => {
       setIsLoggedIn(false);
     }
   };
-
   if (isLoading) {
     return <p className="loading">Loading...</p>;
   }

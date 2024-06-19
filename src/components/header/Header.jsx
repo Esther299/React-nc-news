@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
+import { UserContext } from '../../contexts/UserContext';
+import { useContext } from 'react';
 
-function Header({ selectedUser, setSelectedUser, setIsLoggedIn }) {
+function Header() {
+  const { selectedUser, setSelectedUser, setIsLoggedIn } =
+    useContext(UserContext);
   const handleLogout = () => {
     setSelectedUser(null);
-    setIsLoggedIn(false)
+    setIsLoggedIn(false);
   };
 
   return (

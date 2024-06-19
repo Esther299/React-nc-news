@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { getTopics } from '../../api';
 import styles from './Navbar.module.css';
+import { UserContext } from '../../contexts/UserContext';
 
 function Navbar() {
   const [topics, setTopics] = useState([]);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [errorCode, setErrorCode] = useState(null);
-  
+  const { errorMsg, setErrorMsg, errorCode, setErrorCode } =
+    useContext(UserContext);
+
   useEffect(() => {
     getTopics()
       .then((fetchedTopics) => {
@@ -17,7 +18,7 @@ function Navbar() {
         setErrorMsg(data.msg);
         setErrorCode(status);
       });
-  }, []);
+  }, [setErrorCode, setErrorMsg]);
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);

@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import CommentForm from '../commentForm/CommentForm.jsx';
 import { deleteCommentById } from '../../../api.js';
 import styles from './Comments.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from '../../../contexts/UserContext.jsx';
 
-function Comments({ articleId, comments, setComments, selectedUser }) {
+
+function Comments({ articleId, comments, setComments }) {
   const [deleteMessage, setDeleteMessage] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [errorCode, setErrorCode] = useState(null);
+  const { selectedUser, errorMsg, setErrorMsg, errorCode, setErrorCode } =
+    useContext(UserContext);
 
   const handleDelete = (comment_id) => {
     setErrorMsg('');
@@ -51,7 +53,6 @@ function Comments({ articleId, comments, setComments, selectedUser }) {
         <CommentForm
           setComments={setComments}
           articleId={articleId}
-          selectedUser={selectedUser}
         />
       </div>
       <ul className={styles.list}>
