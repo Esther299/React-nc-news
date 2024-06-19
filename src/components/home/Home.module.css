@@ -1,0 +1,37 @@
+.main-content {
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; 
+}
+
+.main-content h1 {
+  font-size: 1.8rem;
+  margin-bottom: 2vw;
+}
+
+.main-content .sort-controls {
+  display: flex;
+  justify-content: end;
+  gap: 2vw;
+  margin-bottom: 2vw;
+}
+
+.main-content label {
+  display: block;
+  margin-bottom: 1vw;
+}
+
+.main-content select {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.main-content .articles-container {
+  margin: auto;
+}
+

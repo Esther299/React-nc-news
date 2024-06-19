@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { getArticles } from '../api';
-import Articles from './home-components/Articles';
+import { getArticles } from '../../api';
+import Articles from './home-components/articles/Articles';
 import { useParams, useSearchParams } from 'react-router-dom';
+import styles from './Home.module.css';
 
 function Home({ articles, setArticles }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,33 +57,49 @@ function Home({ articles, setArticles }) {
   }
 
   if (isLoading) {
-    return <p className="loading">Loading...</p>;
+    return <p className='loading'>Loading...</p>;
   }
 
-  return !errorCode && !errorMsg ? (
-    <main>
+  if (errorCode || errorMsg) {
+    return (
+      <p>
+        {errorCode}: {errorMsg}
+      </p>
+    );
+  }
+
+  return (
+    <main className={styles['main-content']}>
       <h1>All the {topic} articles here:</h1>
-      <div>
+      <div className={styles['sort-controls']}>
         <label>
-          Sort by:
-          <select value={sortBy} onChange={handleChangeSort}>
+          Sort by:{' '}
+          <select
+            value={sortBy}
+            onChange={handleChangeSort}
+            className={styles.select}
+          >
             <option value="created_at">Date</option>
             <option value="comment_count">Comment count</option>
             <option value="votes">Votes</option>
           </select>
         </label>
         <label>
-          Order:
-          <select value={orderBy} onChange={handleChangeOrder}>
+          Order:{' '}
+          <select
+            value={orderBy}
+            onChange={handleChangeOrder}
+            className={styles.select}
+          >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>
         </label>
       </div>
-      <Articles articles={articles} />
+      <div className={styles['articles-container']}>
+        <Articles articles={articles} />
+      </div>
     </main>
-  ) : (
-      <p>{errorCode}: {errorMsg}</p>
   );
 }
 export default Home;

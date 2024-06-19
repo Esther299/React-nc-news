@@ -4,10 +4,12 @@ import {
   getArticleById,
   getCommentsByArticleId,
   patchArticleById,
-} from '../api';
-import './ArticlePage.css';
-import Comments from './articlePage-components/Comments';
+} from '../../api';
+import styles from './ArticlePage.module.css';
+import Comments from './comments/Comments';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 const ArticlePage = ({ selectedUser }) => {
   const { article_id } = useParams();
@@ -54,25 +56,33 @@ const ArticlePage = ({ selectedUser }) => {
   };
 
   if (isLoading) {
-    return <p className="loading">Loading...</p>;
+    return <p className='loading'>Loading...</p>;
   }
 
-  return !errorCode && !errorMsg ? (
-    <div className="article">
+  if (errorCode || errorMsg) {
+    return (
+      <p>
+        {errorCode}: {errorMsg}
+      </p>
+    );
+  }
+
+  return (
+    <div className={styles.article}>
       <h2>{article.title}</h2>
       <p>{article.body}</p>
       <img src={article.article_img_url} alt={article.title} />
-      <h3>By {article.author}</h3>
-      <p className="substring">
+      <h3 className={styles.author}>By {article.author}</h3>
+      <p className={styles.substring}>
         Published: {article.created_at.substring(0, 10)} at{' '}
         {article.created_at.substring(11, 19)}
       </p>
-      <div className="vote-section">
-        <p>Add likes:</p>
+      <div className={styles['vote-section']}>
         <button onClick={() => upVote(article.article_id)}>
-          {article.votes}
-          <span aria-label="vote this article"> likes</span>
+          <span aria-label="vote this article"> Add likes</span>
         </button>
+        {article.votes}
+        <FontAwesomeIcon icon={faThumbsUp} className={styles['thumbs-up']} />
       </div>
       <hr />
       <Comments
@@ -82,12 +92,10 @@ const ArticlePage = ({ selectedUser }) => {
         selectedUser={selectedUser}
       />
       <hr />
-      <Link className="link" to={`/`}>
+      <Link className={styles.link} to={`/`}>
         <button>Home</button>
       </Link>
     </div>
-  ) : (
-      <p>{errorCode}: {errorMsg}</p>
   );
 };
 

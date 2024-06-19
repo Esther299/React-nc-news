@@ -1,0 +1,100 @@
+.article {
+  padding: 3vw;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 3vw auto;
+  max-width: 70%;
+  justify-content: center;
+}
+
+.article h2 {
+  font-size: 2rem;
+  margin: 2vw;
+}
+
+.article p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.3vw;
+}
+
+.article img {
+  width: 80%;
+  height: auto;
+  border-radius: 5px;
+  margin: 1vw auto;
+  display: flex;
+}
+
+.author {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 2vw;
+}
+
+.article .substring {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1vw;
+}
+
+.article .vote-section {
+  margin-bottom: 2vw;
+}
+
+.article .vote-section .thumbs-up {
+  color: #28a745;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.article .vote-section button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.article .vote-section button:hover {
+  background-color: #218838;
+}
+
+.article .vote-section button span {
+  margin-left: 5px;
+}
+
+.article hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.article .link {
+  text-decoration: none;
+}
+
+.article .link button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.article .link button:hover {
+  background-color: #0056b3;
+}
+
+.loading {
+  font-size: 4rem;
+  margin-top: 5vw;
+  display: flex;
+  justify-content: center;
+}

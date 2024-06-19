@@ -1,8 +1,9 @@
-import Article from './Article';
+import Article from '../article/Article';
+import styles from './Articles.module.css'
 
 function Articles({ articles }) {
   return (
-    <ul className="articles-list">
+    <ul className={styles.list}>
       {articles.map((article) => (
         <Article key={article.article_id} article={article} />
       ))}
