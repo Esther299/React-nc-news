@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   getArticleById,
@@ -10,15 +10,21 @@ import Comments from './comments/Comments';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from '../../contexts/UserContext';
 
-const ArticlePage = ({ selectedUser }) => {
+const ArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    errorMsg,
+    setErrorMsg,
+    errorCode,
+    setErrorCode,
+    isLoading,
+    setIsLoading,
+  } = useContext(UserContext);
   const [hasVoted, setHasVoted] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [errorCode, setErrorCode] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,7 +42,7 @@ const ArticlePage = ({ selectedUser }) => {
         setErrorCode(status);
         setIsLoading(false);
       });
-  }, [article_id]);
+  }, [article_id, setIsLoading, setErrorMsg, setErrorCode]);
 
   const upVote = (article_id) => {
     if (!hasVoted) {
@@ -49,14 +55,16 @@ const ArticlePage = ({ selectedUser }) => {
         .then(() => {
           setHasVoted(true);
         })
-        .catch(() => {
-          setError('Error voting article:');
+        .catch(({ response: { data, status } }) => {
+          setErrorMsg(data.msg);
+          setErrorCode(status);
+          setIsLoading(false);
         });
     }
   };
 
   if (isLoading) {
-    return <p className='loading'>Loading...</p>;
+    return <p className="loading">Loading...</p>;
   }
 
   if (errorCode || errorMsg) {
@@ -65,6 +73,10 @@ const ArticlePage = ({ selectedUser }) => {
         {errorCode}: {errorMsg}
       </p>
     );
+  }
+
+  if (!article) {
+    return null;
   }
 
   return (
@@ -89,7 +101,6 @@ const ArticlePage = ({ selectedUser }) => {
         comments={comments}
         setComments={setComments}
         articleId={article.article_id}
-        selectedUser={selectedUser}
       />
       <hr />
       <Link className={styles.link} to={`/`}>

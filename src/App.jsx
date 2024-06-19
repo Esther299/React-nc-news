@@ -12,9 +12,7 @@ import ErrorPage from './components/ErrorPage';
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
   const [articles, setArticles] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   
 
   useEffect(() => {
@@ -29,7 +27,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header selectedUser={selectedUser} setSelectedUser={setSelectedUser} setIsLoggedIn={setIsLoggedIn} />
+      <Header />
       <Navbar />
       <Routes>
         <Route
@@ -38,15 +36,15 @@ function App() {
         />
         <Route
           path="/signin"
-          element={<SignIn users={users} setSelectedUser={setSelectedUser} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
+          element={<SignIn users={users} />}
         />
         <Route
           path="/profile"
-          element={<ProfilePage selectedUser={selectedUser} />}
+          element={<ProfilePage />}
         />
         <Route
           path="/articles/:article_id"
-          element={<ArticlePage selectedUser={selectedUser} />}
+          element={<ArticlePage />}
         />
         <Route path="*" element={<ErrorPage/>} />
       </Routes>

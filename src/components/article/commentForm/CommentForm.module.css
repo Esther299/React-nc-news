@@ -19,6 +19,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   resize: vertical;
+  padding: 1vw;
+  line-height: 1.5;
 }
 
 .form p {

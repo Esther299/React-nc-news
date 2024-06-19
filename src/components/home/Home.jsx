@@ -1,59 +1,34 @@
-import { useState, useEffect } from 'react';
-import { getArticles } from '../../api';
+import {  useContext } from 'react';
 import Articles from './home-components/articles/Articles';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styles from './Home.module.css';
+import { UserContext } from '../../contexts/UserContext';
+import { useFetchArticles } from './useFetchArticles';
+import { useArticleSearchParams } from './useArticleSearchParams';
 
 function Home({ articles, setArticles }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [errorMsg, setErrorMsg] = useState('');
-  const [errorCode, setErrorCode] = useState(null);
-
-  const defaultSortBy = 'created_at';
-  const defaultOrderBy = 'desc';
-  const sortByParam = searchParams.get('sort_by') || defaultSortBy;
-  const orderByParam = searchParams.get('order_by') || defaultOrderBy;
-
-  const [sortBy, setSortBy] = useState(sortByParam);
-  const [orderBy, setOrderBy] = useState(orderByParam);
-
   const { topic } = useParams();
+  const { sortBy, orderBy, setSortBy, setOrderBy } = useArticleSearchParams();
+  const { isLoading, setIsLoading, errorMsg, setErrorMsg, errorCode, setErrorCode } = useContext(UserContext);
 
-  useEffect(() => {
-    if (!searchParams.has('sort_by')) {
-      searchParams.set('sort_by', defaultSortBy);
-    }
-    if (!searchParams.has('order_by')) {
-      searchParams.set('order_by', defaultOrderBy);
-    }
-    setSearchParams(searchParams);
-
-    setIsLoading(true);
-    getArticles(topic, { sort_by: sortBy, order_by: orderBy })
-      .then((fetchedArticles) => {
-        setArticles(fetchedArticles);
-        setIsLoading(false);
-      })
-      .catch(({ response: { data, status } }) => {
-        setErrorMsg(data.msg);
-        setErrorCode(status);
-        setIsLoading(false);
-      });
-  }, [topic, sortBy, orderBy]);
+  useFetchArticles(
+    topic,
+    sortBy,
+    orderBy,
+    setArticles,
+    setIsLoading,
+    setErrorMsg,
+    setErrorCode
+  );
 
   function handleChangeOrder(event) {
     const newOrder = event.target.value;
     setOrderBy(newOrder);
-    searchParams.set('order_by', newOrder);
-    setSearchParams(searchParams);
   }
 
   function handleChangeSort(event) {
     const newSort = event.target.value;
     setSortBy(newSort);
-    searchParams.set('sort_by', newSort);
-    setSearchParams(searchParams);
   }
 
   if (isLoading) {

@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { postComment } from '../../../api';
+import { useState, useContext } from 'react';
+import { postComment } from '../../../api.js';
 import styles from './CommentForm.module.css';
+import { UserContext } from '../../../contexts/UserContext.jsx';
 
-function CommentForm({ articleId, setComments, selectedUser }) {
+function CommentForm({ articleId, setComments }) {
   const [body, setBody] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [errorCode, setErrorCode] = useState(null);
+  const { selectedUser, errorMsg, setErrorMsg, errorCode, setErrorCode } =
+    useContext(UserContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
