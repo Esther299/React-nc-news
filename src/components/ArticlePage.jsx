@@ -15,9 +15,11 @@ const ArticlePage = ({ selectedUser }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasVoted, setHasVoted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorCode, setErrorCode] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     Promise.all([
       getArticleById(article_id),
       getCommentsByArticleId(article_id),
@@ -27,8 +29,9 @@ const ArticlePage = ({ selectedUser }) => {
         setComments(fetchedComments);
         setIsLoading(false);
       })
-      .catch((err) => {
-        console.error('Error fetching article or/and its comments:', err);
+      .catch(({ response: { data, status } }) => {
+        setErrorMsg(data.msg);
+        setErrorCode(status);
         setIsLoading(false);
       });
   }, [article_id]);
@@ -36,17 +39,17 @@ const ArticlePage = ({ selectedUser }) => {
   const upVote = (article_id) => {
     if (!hasVoted) {
       setArticle((currentArticle) => ({
-      ...currentArticle,
-      votes: currentArticle.votes + 1,
-    }));
+        ...currentArticle,
+        votes: currentArticle.votes + 1,
+      }));
 
-    patchArticleById(article_id)
-      .then(() => {
-        setHasVoted(true)
-      })
-      .catch((err) => {
-        console.error('Error upvoting article:', err);
-      });
+      patchArticleById(article_id)
+        .then(() => {
+          setHasVoted(true);
+        })
+        .catch(() => {
+          setError('Error voting article:');
+        });
     }
   };
 
@@ -54,7 +57,7 @@ const ArticlePage = ({ selectedUser }) => {
     return <p className="loading">Loading...</p>;
   }
 
-  return (
+  return !errorCode && !errorMsg ? (
     <div className="article">
       <h2>{article.title}</h2>
       <p>{article.body}</p>
@@ -83,6 +86,8 @@ const ArticlePage = ({ selectedUser }) => {
         <button>Home</button>
       </Link>
     </div>
+  ) : (
+      <p>{errorCode}: {errorMsg}</p>
   );
 };
 

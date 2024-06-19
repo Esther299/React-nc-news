@@ -3,8 +3,9 @@ import { postComment } from '../../api';
 
 function CommentForm({ articleId, setComments, selectedUser }) {
   const [body, setBody] = useState('');
-  const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorCode, setErrorCode] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,12 +17,12 @@ function CommentForm({ articleId, setComments, selectedUser }) {
         .then((newComment) => {
           setComments((currentComments) => [newComment, ...currentComments]);
           setBody('');
-          setIsSubmitting(false)
+          setIsSubmitting(false);
         })
-        .catch((err) => {
-          console.error('Error posting comment:', err);
-          setError('Failed to post the comment. Try again.');
-          setIsSubmitting(false)
+        .catch(({ response: { data, status } }) => {
+          setErrorMsg(data.msg);
+          setErrorCode(status);
+          setIsSubmitting(false);
         });
     }
   };
@@ -42,7 +43,7 @@ function CommentForm({ articleId, setComments, selectedUser }) {
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Adding...' : 'Add'}
         </button>
-        {error && <p>{error}</p>}
+        {errorCode && errorCode ? <p>{errorCode}: {errorMsg}</p> : null}
       </form>
     </>
   ) : (

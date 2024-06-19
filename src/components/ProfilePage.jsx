@@ -2,7 +2,7 @@ function ProfilePage({ selectedUser }) {
   return selectedUser ? (
     <div className="selected-user-container">
       <div>
-        <h3>Selected User</h3>
+        <h3>Profile</h3>
         <p>Username: {selectedUser.username}</p>
         <p>Name: {selectedUser.name}</p>
         <img
@@ -15,7 +15,7 @@ function ProfilePage({ selectedUser }) {
   ) : (
     <div className="selected-user-container">
       <div>
-        <h3>Selected User</h3>
+        <h3>Profile</h3>
         <p>Username: none</p>
         <p>Name: none</p>
         <img

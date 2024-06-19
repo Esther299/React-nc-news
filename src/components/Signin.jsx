@@ -7,20 +7,28 @@ const SignIn = ({ users, setSelectedUser }) => {
   const [currUser, setCurrUser] = useState('');
   const [viewUser, setViewUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorCode, setErrorCode] = useState(null);
 
   const handleChange = (event) => {
     const username = event.target.value;
     setCurrUser(username);
+    setIsLoading(true);
     if (username) {
       getUserByUsername(username)
         .then((fetchedUser) => {
           setViewUser(fetchedUser);
+          setIsLoading(false);
         })
-        .catch((error) => {
-          console.error('Error fetching user:', error);
+        .catch(({response: {data, status}}) => {
+          setErrorMsg(data.msg);
+          setErrorCode(status)
+          setIsLoading(false);
         });
     } else {
       setViewUser(null);
+      setIsLoading(false);
     }
   };
 
@@ -35,10 +43,12 @@ const SignIn = ({ users, setSelectedUser }) => {
     }
   };
 
+  if (isLoading) {
+    return <p className="loading">Loading...</p>;
+  }
+
   return isLoggedIn ? (
-    <Link className="link" to={`/profile`}>
-      <button>See Profile</button>
-    </Link>
+    <p>You have successfully signed in</p>
   ) : (
     <div className="signin-container">
       <h2>Sign In</h2>
@@ -55,8 +65,10 @@ const SignIn = ({ users, setSelectedUser }) => {
             </option>
           ))}
         </select>
-
-        <button type="submit">Sign in</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Signing in...' : 'Sign in'}
+        </button>
+          {errorCode && errorMsg ? <p>{errorCode}: {errorMsg}</p> : null}
       </form>
       {viewUser && (
         <div className="selected-user">

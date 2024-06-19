@@ -4,17 +4,21 @@ import { getTopics } from '../api';
 
 function Navbar() {
   const [topics, setTopics] = useState([]);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorCode, setErrorCode] = useState(null);
+  
   useEffect(() => {
     getTopics()
       .then((fetchedTopics) => {
         setTopics(fetchedTopics);
       })
-      .catch((err) => {
-        console.error('Error fetching topics:', err);
+      .catch(({ response: { data, status } }) => {
+        setErrorMsg(data.msg);
+        setErrorCode(status);
       });
   }, []);
 
-  return (
+  return !errorCode && !errorMsg ? (
     <nav className="navbar">
       <ul>
         <li>
@@ -34,6 +38,6 @@ function Navbar() {
         })}
       </ul>
     </nav>
-  );
+  ) : (<p>{errorCode}: {errorMsg}</p>)
 }
 export default Navbar;
