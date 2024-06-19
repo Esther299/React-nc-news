@@ -8,21 +8,22 @@ const SignIn = ({ users, setSelectedUser }) => {
   const [viewUser, setViewUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorCode, setErrorCode] = useState(null);
 
   const handleChange = (event) => {
     const username = event.target.value;
     setCurrUser(username);
     setIsLoading(true);
-    setError(null);
     if (username) {
       getUserByUsername(username)
         .then((fetchedUser) => {
           setViewUser(fetchedUser);
           setIsLoading(false);
         })
-        .catch(() => {
-          setError('Error fetching user');
+        .catch(({response: {data, status}}) => {
+          setErrorMsg(data.msg);
+          setErrorCode(status)
           setIsLoading(false);
         });
     } else {
@@ -33,7 +34,6 @@ const SignIn = ({ users, setSelectedUser }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setError(null);
     if (viewUser) {
       setSelectedUser(viewUser);
       setIsLoggedIn(true);
@@ -68,7 +68,7 @@ const SignIn = ({ users, setSelectedUser }) => {
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Signing in...' : 'Sign in'}
         </button>
-        {error ? <p>{error}</p> : null}
+          {errorCode && errorMsg ? <p>{errorCode}: {errorMsg}</p> : null}
       </form>
       {viewUser && (
         <div className="selected-user">

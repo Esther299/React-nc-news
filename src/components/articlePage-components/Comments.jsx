@@ -4,8 +4,9 @@ import { deleteCommentById } from '../../api.js';
 
 function Comments({ articleId, comments, setComments, selectedUser }) {
   const [deleteMessage, setDeleteMessage] = useState('');
-  const [error, setError] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorCode, setErrorCode] = useState(null);
 
   const handleDelete = (comment_id) => {
     setError(null);
@@ -21,9 +22,10 @@ function Comments({ articleId, comments, setComments, selectedUser }) {
           setDeleteMessage('');
         }, 5000);
       })
-      .catch(() => {
-        setError('Failed to delete the comment. Try again.');
-        setIsDeleting(false);
+      .catch(({ response: { data, status } }) => {
+        setErrorMsg(data.msg);
+        setErrorCode(status);
+        setIsSubmitting(false);
       });
   };
 
@@ -56,7 +58,11 @@ function Comments({ articleId, comments, setComments, selectedUser }) {
                 >
                   {isDeleting ? 'Deleting...' : 'Delete'}
                 </button>
-                {error && <p>{error}</p>}
+                {errorCode && errorCode ? (
+                  <p>
+                    {errorCode}: {errorMsg}
+                  </p>
+                ) : null}
               </>
             )}
           </li>

@@ -15,7 +15,8 @@ const ArticlePage = ({ selectedUser }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasVoted, setHasVoted] = useState(false);
-  const [error, setError] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorCode, setErrorCode] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -28,8 +29,9 @@ const ArticlePage = ({ selectedUser }) => {
         setComments(fetchedComments);
         setIsLoading(false);
       })
-      .catch(() => {
-        setError('Error fetching data');
+      .catch(({ response: { data, status } }) => {
+        setErrorMsg(data.msg);
+        setErrorCode(status);
         setIsLoading(false);
       });
   }, [article_id]);
@@ -55,7 +57,7 @@ const ArticlePage = ({ selectedUser }) => {
     return <p className="loading">Loading...</p>;
   }
 
-  return !error ? (
+  return !errorCode && !errorMsg ? (
     <div className="article">
       <h2>{article.title}</h2>
       <p>{article.body}</p>
@@ -85,7 +87,7 @@ const ArticlePage = ({ selectedUser }) => {
       </Link>
     </div>
   ) : (
-    <p>{error}</p>
+      <p>{errorCode}: {errorMsg}</p>
   );
 };
 

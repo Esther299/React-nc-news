@@ -4,9 +4,10 @@ import Articles from './home-components/Articles';
 import { useParams, useSearchParams } from 'react-router-dom';
 
 function Home({ articles, setArticles }) {
-  const [isLoading, setIsLoding] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [error, setError] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorCode, setErrorCode] = useState(null);
 
   const defaultSortBy = 'created_at';
   const defaultOrderBy = 'desc';
@@ -27,15 +28,16 @@ function Home({ articles, setArticles }) {
     }
     setSearchParams(searchParams);
 
-    setIsLoding(true);
+    setIsLoading(true);
     getArticles(topic, { sort_by: sortBy, order_by: orderBy })
       .then((fetchedArticles) => {
         setArticles(fetchedArticles);
-        setIsLoding(false);
+        setIsLoading(false);
       })
-      .catch(() => {
-        setError('Error fetching articles');
-        setIsLoding(false);
+      .catch(({ response: { data, status } }) => {
+        setErrorMsg(data.msg);
+        setErrorCode(status);
+        setIsLoading(false);
       });
   }, [topic, sortBy, orderBy]);
 
@@ -57,7 +59,7 @@ function Home({ articles, setArticles }) {
     return <p className="loading">Loading...</p>;
   }
 
-  return !error ? (
+  return !errorCode && !errorMsg ? (
     <main>
       <h1>All the {topic} articles here:</h1>
       <div>
@@ -80,7 +82,7 @@ function Home({ articles, setArticles }) {
       <Articles articles={articles} />
     </main>
   ) : (
-    <p>{error}</p>
+      <p>{errorCode}: {errorMsg}</p>
   );
 }
 export default Home;
