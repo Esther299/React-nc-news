@@ -1,0 +1,38 @@
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 2vw;
+  border-radius: 10px;
+}
+
+.profile div {
+  background-color: #fff;
+  padding: 2vw;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile h3 {
+  font-size: 2rem;
+  text-decoration: underline;
+  margin-bottom: 1vw;
+}
+
+.profile p {
+  margin-bottom: 1vw;
+}
+
+.profile span {
+  margin-bottom: 1vw;
+  font-size: 1.5rem;
+}
+
+.image {
+  margin-top: 2vw;
+  border-radius: 50%;
+  width: 15vw;
+  object-fit: cover;
+}

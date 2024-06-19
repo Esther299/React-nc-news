@@ -1,0 +1,89 @@
+.comments {
+  margin-top: 2vw;
+}
+
+.formContainer {
+  margin-top: 2vw;
+}
+
+h3 {
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 2vw;
+  margin-top: 1.5vw;
+}
+
+.card p {
+  margin-bottom: 0.6vw;
+}
+
+.comment-body {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: #333;
+}
+
+.comment-author {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.comment-date {
+  font-style: italic;
+  color: #666;
+}
+
+.comment-likes .thumbs-up {
+  color: #28a745;
+}
+
+.comment-likes .thumbs-down {
+  color: #dc3545;
+}
+
+.comment-likes .likes-count {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 1vw auto;
+  width: 15%;
+}
+
+.delete-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.delete-message {
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}

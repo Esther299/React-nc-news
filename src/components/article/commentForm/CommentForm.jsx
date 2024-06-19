@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { postComment } from '../../api';
+import { postComment } from '../../../api';
+import styles from './CommentForm.module.css';
 
 function CommentForm({ articleId, setComments, selectedUser }) {
   const [body, setBody] = useState('');
@@ -9,9 +10,10 @@ function CommentForm({ articleId, setComments, selectedUser }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setError(null);
+    setErrorMsg('');
+    setErrorCode(null);
     if (selectedUser) {
-      setIsSubmitting(true)
+      setIsSubmitting(true);
       const author = selectedUser.username;
       postComment(articleId, { author, body })
         .then((newComment) => {
@@ -28,8 +30,8 @@ function CommentForm({ articleId, setComments, selectedUser }) {
   };
 
   return selectedUser ? (
-    <>
-      <form className="comment-adder" onSubmit={handleSubmit}>
+    <div className={styles.formContainer}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor="new-comment">Write a comment:</label>
         <textarea
           id="new-comment"
@@ -37,15 +39,20 @@ function CommentForm({ articleId, setComments, selectedUser }) {
           value={body}
           onChange={(event) => setBody(event.target.value)}
           required
+          className={styles.textarea}
         ></textarea>
         <br />
         <p>Commenting as: {selectedUser.username}</p>
-        <button type="submit" disabled={isSubmitting}>
+        <button type="submit" disabled={isSubmitting} className={styles.button}>
           {isSubmitting ? 'Adding...' : 'Add'}
         </button>
-        {errorCode && errorCode ? <p>{errorCode}: {errorMsg}</p> : null}
+        {errorCode && (
+          <p className={styles.error}>
+            {errorCode}: {errorMsg}
+          </p>
+        )}
       </form>
-    </>
+    </div>
   ) : (
     <p>Log in to post a comment</p>
   );

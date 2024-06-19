@@ -1,0 +1,53 @@
+
+.form {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 3vw;
+  border-radius: 5px;
+  margin-bottom: 3vw;
+  width: 90%;
+}
+
+.form label {
+  font-weight: bold;
+  margin-bottom: 1.5vw;
+}
+
+.textarea {
+  width: 90%;
+  height: 12vw;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.form p {
+  margin-top: 1vw;
+  font-style: italic;
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 25%;
+  margin: auto;
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
