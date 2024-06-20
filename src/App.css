@@ -40,3 +40,56 @@ button:disabled {
   display: flex;
   justify-content: center;
 }
+
+.error {
+  color: #d9534f; 
+  background-color: #f2dede; 
+  border: 1px solid #ebccd1;
+  padding: 1vw;
+  border-radius: 5px;
+  margin: 1vw 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  background-color: #f8d7da;
+  padding: 2vw;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  margin: 2vw;
+}
+
+.error-code {
+  font-size: 3em;
+  color: #721c24;
+  margin-bottom: 1vw;
+}
+
+.error-message {
+  font-size: 1.2em;
+  color: #721c24;
+  margin-bottom: 2vw;
+}
+
+.home-link {
+  font-size: 1em;
+  color: #0056b3;
+  text-decoration: none;
+  background-color: #cce5ff;
+  padding: 1vw 2vw;
+  border-radius: 5px;
+  border: 1px solid #b8daff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.home-link:hover {
+  background-color: #b8daff;
+  color: #004085;
+}

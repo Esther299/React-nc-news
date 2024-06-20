@@ -48,7 +48,7 @@ function CommentForm({ articleId, setComments }) {
           {isSubmitting ? 'Adding...' : 'Add'}
         </button>
         {errorCode && (
-          <p className={styles.error}>
+          <p className='error'>
             {errorCode}: {errorMsg}
           </p>
         )}

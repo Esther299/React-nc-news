@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../../contexts/UserContext';
+import ErrorPage from '../ErrorPage';
 
 const ArticlePage = () => {
   const { article_id } = useParams();
@@ -67,17 +68,17 @@ const ArticlePage = () => {
     return <p className="loading">Loading...</p>;
   }
 
+  if (!article) return <ErrorPage />;
+
   if (errorCode || errorMsg) {
     return (
-      <p>
+      <p className='error'>
         {errorCode}: {errorMsg}
       </p>
     );
   }
 
-  if (!article) {
-    return null;
-  }
+  
 
   return (
     <div className={styles.article}>

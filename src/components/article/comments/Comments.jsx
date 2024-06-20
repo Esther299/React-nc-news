@@ -90,7 +90,7 @@ function Comments({ articleId, comments, setComments }) {
                   {isDeleting ? 'Deleting...' : 'Delete'}
                 </button>
                 {errorCode && (
-                  <p className={styles.error}>
+                  <p className='error'>
                     {errorCode}: {errorMsg}
                   </p>
                 )}
