@@ -26,9 +26,18 @@ function Navbar() {
 
   if (errorCode || errorMsg) {
     return (
-      <p className='error'>
-        {errorCode}: {errorMsg}
-      </p>
+      <nav className={styles.navbar}>
+        <ul>
+          <li>
+            <Link className={styles.link} to="/">
+              Home
+            </Link>
+          </li>
+        </ul>
+        <p className="error">
+          {errorCode}: {errorMsg}
+        </p>
+      </nav>
     );
   }
 
