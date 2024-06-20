@@ -111,3 +111,71 @@ hr {
 .link button:hover {
   background-color: #5a6268;
 }
+
+@media (min-width: 600px) {
+  .signin {
+    max-width: 80%;
+    padding: 2.5vw;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2.5vw;
+  }
+
+  .userSelect {
+    gap: 1.5vw;
+    line-height: 2.5rem;
+  }
+
+  .selectedUser h3 {
+    font-size: 1.75rem;
+  }
+
+  .selectedUser span {
+    font-size: 1.4rem;
+  }
+
+  .userImage {
+    width: 30vw;
+  }
+
+  .logged {
+    font-size: 3rem;
+    margin-top: 4vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signin {
+    max-width: 60%;
+    padding: 3vw;
+  }
+
+  h2 {
+    font-size: 3rem;
+    margin-bottom: 2vw;
+  }
+
+  .userSelect {
+    gap: 1vw;
+    line-height: 3rem;
+  }
+
+  .selectedUser h3 {
+    font-size: 2rem;
+  }
+
+  .selectedUser span {
+    font-size: 1.5rem;
+  }
+
+  .userImage {
+    width: 20vw;
+  }
+
+  .logged {
+    font-size: 4rem;
+    margin-top: 3vw;
+  }
+}

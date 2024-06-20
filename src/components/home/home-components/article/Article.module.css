@@ -65,3 +65,53 @@
    background-color: #999; 
   color: #fff;
 }
+
+@media (min-width: 600px) {
+  .article {
+    padding: 15px;
+  }
+
+  .article h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5vw;
+  }
+
+  .article h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5vw;
+  }
+
+  .article p {
+    font-size: 1rem;
+  }
+
+  .article button {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .article {
+    padding: 25px;
+  }
+
+  .article h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1vw;
+  }
+
+  .article h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1vw;
+  }
+
+  .article p {
+    font-size: 1.1rem;
+  }
+
+  .article button {
+    padding: 14px 26px;
+    font-size: 1.2rem;
+  }
+}
