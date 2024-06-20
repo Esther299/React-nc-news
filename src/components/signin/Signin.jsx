@@ -62,7 +62,7 @@ const SignIn = ({ users }) => {
 
   if (errorCode || errorMsg) {
     return (
-      <p>
+      <p className='error'>
         {errorCode}: {errorMsg}
       </p>
     );

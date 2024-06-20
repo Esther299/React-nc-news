@@ -91,10 +91,3 @@
 .article .link button:hover {
   background-color: #0056b3;
 }
-
-.loading {
-  font-size: 4rem;
-  margin-top: 5vw;
-  display: flex;
-  justify-content: center;
-}

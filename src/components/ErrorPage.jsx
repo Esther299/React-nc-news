@@ -1,20 +1,20 @@
-const ErrorPage = (props) => {
-  const [error, setError] = useState(null);
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContext';
 
-  useEffect(() => {
-    getData()
-      .then((stuff) => {
-        // do stuff
-      })
-      .catch((err) => {
-        setError({ err });
-      });
-  }, []);
 
-  if (error) {
-    return <ErrorComponent message={error.something.keyForTheErrorMessage} />;
-  }
-  return <Stuff />;
+const ErrorPage = () => {
+  const { errorCode, errorMsg } = useContext(UserContext);
+
+  return (
+    <div className="error-page">
+      <h1 className="error-code">Error {errorCode}</h1>
+      <p className="error-message">{errorMsg}</p>
+      <Link className="home-link" to="/">
+        Back to Home
+      </Link>
+    </div>
+  );
 };
 
 export default ErrorPage;

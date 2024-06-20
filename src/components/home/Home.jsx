@@ -1,15 +1,23 @@
-import {  useContext } from 'react';
+import { useContext } from 'react';
 import Articles from './home-components/articles/Articles';
 import { useParams } from 'react-router-dom';
 import styles from './Home.module.css';
 import { UserContext } from '../../contexts/UserContext';
 import { useFetchArticles } from './useFetchArticles';
 import { useArticleSearchParams } from './useArticleSearchParams';
+import ErrorPage from '../ErrorPage';
 
 function Home({ articles, setArticles }) {
   const { topic } = useParams();
   const { sortBy, orderBy, setSortBy, setOrderBy } = useArticleSearchParams();
-  const { isLoading, setIsLoading, errorMsg, setErrorMsg, errorCode, setErrorCode } = useContext(UserContext);
+  const {
+    isLoading,
+    setIsLoading,
+    errorMsg,
+    setErrorMsg,
+    errorCode,
+    setErrorCode,
+  } = useContext(UserContext);
 
   useFetchArticles(
     topic,
@@ -32,12 +40,14 @@ function Home({ articles, setArticles }) {
   }
 
   if (isLoading) {
-    return <p className='loading'>Loading...</p>;
+    return <p className="loading">Loading...</p>;
   }
+
+  if (!articles.length) return <ErrorPage />;
 
   if (errorCode || errorMsg) {
     return (
-      <p>
+      <p className="error">
         {errorCode}: {errorMsg}
       </p>
     );
