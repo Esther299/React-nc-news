@@ -43,15 +43,13 @@
   margin-bottom: 2vw;
 }
 
-.article .vote-section .thumbs-up {
-  color: #28a745;
+.article .vote-section .thumbs {
+  color: black;
   margin-left: 5px;
   margin-right: 10px;
 }
 
 .article .vote-section button {
-  background-color: #28a745;
-  color: #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -60,8 +58,22 @@
   margin-right: 10px;
 }
 
-.article .vote-section button:hover {
+.voteButton {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.voteButton:hover {
   background-color: #218838;
+}
+
+.undoButton {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.undoButton:hover {
+  background-color: #c82333;
 }
 
 .article .vote-section button span {

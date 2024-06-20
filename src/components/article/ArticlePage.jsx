@@ -9,7 +9,7 @@ import styles from './ArticlePage.module.css';
 import Comments from './comments/Comments';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../../contexts/UserContext';
 import ErrorPage from '../ErrorPage';
 
@@ -45,16 +45,37 @@ const ArticlePage = () => {
       });
   }, [article_id, setIsLoading, setErrorMsg, setErrorCode]);
 
-  const upVote = (article_id) => {
+  const handleVote = (article_id, voteType) => {
+    let num = 0
+    if (voteType === 'upvote') {
+      num = 1
+    }
+    if (voteType === 'downvote') {
+      num = -1
+    }
     if (!hasVoted) {
       setArticle((currentArticle) => ({
         ...currentArticle,
         votes: currentArticle.votes + 1,
       }));
 
-      patchArticleById(article_id)
+      patchArticleById(article_id, num)
         .then(() => {
           setHasVoted(true);
+        })
+        .catch(({ response: { data, status } }) => {
+          setErrorMsg(data.msg);
+          setErrorCode(status);
+          setIsLoading(false);
+        });
+    } else {
+      setArticle((currentArticle) => ({
+        ...currentArticle,
+        votes: currentArticle.votes - 1,
+      }));
+      patchArticleById(article_id, num)
+        .then(() => {
+          setHasVoted(false);
         })
         .catch(({ response: { data, status } }) => {
           setErrorMsg(data.msg);
@@ -72,13 +93,11 @@ const ArticlePage = () => {
 
   if (errorCode || errorMsg) {
     return (
-      <p className='error'>
+      <p className="error">
         {errorCode}: {errorMsg}
       </p>
     );
   }
-
-  
 
   return (
     <div className={styles.article}>
@@ -91,11 +110,25 @@ const ArticlePage = () => {
         {article.created_at.substring(11, 19)}
       </p>
       <div className={styles['vote-section']}>
-        <button onClick={() => upVote(article.article_id)}>
+        <button
+          className={styles.voteButton}
+          onClick={() => handleVote(article.article_id, 'upvote')}
+          disabled={hasVoted}
+        >
+          <FontAwesomeIcon icon={faThumbsUp} className={styles['thumbs']} />
           <span aria-label="vote this article"> Add likes</span>
         </button>
-        {article.votes}
-        <FontAwesomeIcon icon={faThumbsUp} className={styles['thumbs-up']} />
+        {hasVoted && (
+          <button
+            className={styles.undoButton}
+            onClick={() => handleVote(article.article_id, 'downvote')}
+            disabled={!hasVoted}
+          >
+            <FontAwesomeIcon icon={faThumbsDown} className={styles['thumbs']} />
+            <span aria-label="undo your vote"> Undo</span>
+          </button>
+        )}
+        <p>Likes: {article.votes}</p>
       </div>
       <hr />
       <Comments
