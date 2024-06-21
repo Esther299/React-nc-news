@@ -1,0 +1,132 @@
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 2vw;
+  margin-top: 1.5vw;
+}
+
+.card p {
+  margin-bottom: 0.6vw;
+}
+
+.comment-body {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: #333;
+}
+
+.comment-author {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.comment-date {
+  font-style: italic;
+  color: #666;
+}
+
+.vote-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.vote-section .thumbs {
+  color: black;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.vote-section button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.likeButton {
+  background-color: #3e978a;
+  color: #fff;
+}
+
+.likeButton:hover {
+  background-color: #2a7771;
+}
+
+.dislikeButton {
+  background-color: #db5083;
+  color: #fff;
+}
+
+.dislikeButton:hover {
+  background-color: #c84381;
+}
+.undo {
+  text-decoration: wavy;
+  color: #000;
+}
+
+.vote-section button span {
+  margin-left: 5px;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 1vw auto;
+  width: 15%;
+}
+
+.delete-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 3vw;
+    margin-top: 2vw;
+  }
+
+  .card p {
+    margin-bottom: 0.8vw;
+  }
+
+  .comment-body {
+    font-size: 1rem;
+  }
+
+  .delete-button {
+    width: 30%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    padding: 2vw;
+    margin-top: 1.5vw;
+  }
+
+  .card p {
+    margin-bottom: 0.6vw;
+  }
+
+  .comment-body {
+    font-size: 1.1rem;
+  }
+
+  .delete-button {
+    width: 15%;
+  }
+}

@@ -62,3 +62,12 @@ export const getUserByUsername = (username) => {
 export const deleteCommentById = (comment_id) => {
   return newsApi.delete(`/comments/${comment_id}`);
 };
+
+export const patchCommentById = (comment_id, num) => {
+  const patchBody = { inc_votes: num };
+  return newsApi
+    .patch(`/comments/${comment_id}`, patchBody)
+    .then(({ data }) => {
+      return data.comment;
+    });
+};

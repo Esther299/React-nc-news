@@ -40,7 +40,9 @@
 }
 
 .article .vote-section {
-  margin-bottom: 2vw;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .article .vote-section .thumbs {
@@ -58,28 +60,31 @@
   margin-right: 10px;
 }
 
-.voteButton {
+.article .likeButton {
   background-color: #28a745;
   color: #fff;
 }
 
-.voteButton:hover {
+.article .likeButton:hover {
   background-color: #218838;
 }
 
-.undoButton {
+.article .dislikeButton {
   background-color: #dc3545;
   color: #fff;
 }
 
-.undoButton:hover {
+.article .dislikeButton:hover {
   background-color: #c82333;
+}
+.article .undo {
+  text-decoration: wavy;
+  color: #000;
 }
 
 .article .vote-section button span {
   margin-left: 5px;
 }
-
 .article hr {
   margin: 20px 0;
   border: none;
