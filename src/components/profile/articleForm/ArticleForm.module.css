@@ -1,0 +1,90 @@
+.formContainer {
+  max-width: 90%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.formContainer h3 {
+  margin-bottom: 1vw;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.formGroup {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 3vw;
+  border-radius: 5px;
+  margin-bottom: 3vw;
+  width: 90%;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.formGroup select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg fill="%23333" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath d="M10 12l-6-6H4l6 6 6-6h-1.01L10 12z"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position-x: calc(100% - 10px);
+  background-position-y: 50%;
+  padding-right: 30px;
+}
+
+.formGroup textarea {
+  width: 100%;
+  height: 12vw;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  padding: 1vw;
+  line-height: 1.5;
+}
+
+.imagePreview {
+  max-width: 100%;
+  margin-top: 10px;
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 25%;
+  margin: auto;
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 10px;
+  }
+}

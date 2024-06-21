@@ -4,7 +4,7 @@ const newsApi = axios.create({
   baseURL: 'https://project-nc-news-8dvh.onrender.com/api',
 });
 
-export const getArticles = (topic, { sort_by, order_by }) => {
+export const getArticles = (topic = '', { sort_by = '', order_by = '' } = {}) => {
   return newsApi
     .get('/articles', { params: { topic, sort_by, order_by } })
     .then(({ data }) => {
@@ -70,4 +70,16 @@ export const patchCommentById = (comment_id, num) => {
     .then(({ data }) => {
       return data.comment;
     });
+};
+
+export const postArticle = ({ author, title, body, topic, article_img_url }) => {
+  return newsApi
+    .post(`/articles/`, { author, title, body, topic, article_img_url })
+    .then(({ data }) => {
+      return data.article;
+    });
+};
+
+export const deleteArticleById = (article_id) => {
+  return newsApi.delete(`/articles/${article_id}`);
 };
