@@ -15,13 +15,12 @@ export function useFetchArticles(
     getArticles(topic, { sort_by: sortBy, order_by: orderBy })
       .then((fetchedArticles) => {
         setArticles(fetchedArticles);
+        setIsLoading(false);
       })
       .catch(({ response: { data, status } }) => {
         setErrorMsg(data.msg);
         setErrorCode(status);
-      })
-      .finally(() => {
         setIsLoading(false);
-      });
+      })
   }, [topic, sortBy, orderBy, setIsLoading, setErrorCode, setErrorMsg]);
 }
