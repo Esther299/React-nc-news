@@ -1,0 +1,111 @@
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2vw 0;
+    text-align: center;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footerSection {
+    margin: 1vw 2vw;
+    flex: 1 1 20vw;
+}
+
+.logo {
+    width: 20vw;
+}
+
+.footerSection h2 {
+    margin-bottom: 1vw;
+    font-size: 2rem;
+}
+
+.footerSection p, .footerSection a {
+    margin: 5px 0;
+    color: #fff;
+    text-decoration: none;
+}
+
+.footerSection a:hover {
+    text-decoration: underline;
+}
+
+.links {
+    list-style: none;
+    padding: 0;
+}
+
+.links li {
+    margin: 5px 0;
+}
+
+.socialIcon {
+    margin: 0 1vw;
+    color: #fff;
+    font-size: 24px;
+    padding: 1vw;
+}
+
+
+.footerBottom {
+    margin-top: 2vw;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footerSection {
+        flex: 1 1 80vw;
+        margin: 2vw 0;
+    }
+
+    .logo {
+        width: 50vw;
+    }
+
+    .footerSection h2 {
+        font-size: 1.5rem;
+    }
+
+    .socialIcon {
+        font-size: 20px;
+        padding: 2vw;
+    }
+
+    .footerBottom {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footerSection h2 {
+        font-size: 1.2rem;
+    }
+
+    .emailInput {
+        width: 90%;
+    }
+
+    .signupButton {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    .socialIcon {
+        font-size: 18px;
+        padding: 2.5vw;
+    }
+
+    .footerBottom {
+        font-size: 0.8rem;
+    }
+}
