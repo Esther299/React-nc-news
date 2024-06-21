@@ -7,8 +7,7 @@ function ArticleForm({ topics, setArticles }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [topic, setTopic] = useState('');
-  const [articleImage, setArticleImage] = useState(null);
-  const [articleImageUrl, setArticleImageUrl] = useState('');
+  const [image, setImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { selectedUser, errorMsg, setErrorMsg, errorCode, setErrorCode } =
     useContext(UserContext);
@@ -26,14 +25,14 @@ function ArticleForm({ topics, setArticles }) {
         author,
         body,
         topic,
-        article_img_url: articleImageUrl,
+        article_img_url: image,
       })
         .then((newComment) => {
           setArticles((currentComments) => [newComment, ...currentComments]);
           setTitle('');
           setBody('');
           setTopic('');
-          setArticleImageUrl('');
+          setImage('');
           setIsSubmitting(false);
         })
         .catch(({ response: { data, status } }) => {
@@ -45,7 +44,7 @@ function ArticleForm({ topics, setArticles }) {
   };
 
   const handleChange = (event) => {
-    const { name, value, files } = event.target;
+    const { name, value } = event.target;
 
     if (name === 'title') {
       setTitle(value);
@@ -53,16 +52,12 @@ function ArticleForm({ topics, setArticles }) {
       setBody(value);
     } else if (name === 'topic') {
       setTopic(value);
-    } else if (name === 'article_img_url' && files.length > 0) {
-      const reader = new FileReader();
-      const file = files[0];
+    }
+  };
 
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setArticleImageUrl(reader.result);
-      };
-
-      setArticleImage(file);
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event.target.files[0]));
     }
   };
 
@@ -119,12 +114,11 @@ function ArticleForm({ topics, setArticles }) {
             type="file"
             id="article_img_url"
             name="article_img_url"
-            accept="image/*"
-            onChange={handleChange}
+            onChange={onImageChange}
           />
-          {articleImageUrl && (
+          {image && (
             <img
-              src={articleImageUrl}
+              src={image}
               alt="Article Preview"
               className={styles.imagePreview}
             />
