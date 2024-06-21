@@ -10,6 +10,7 @@ import SignIn from './components/signin/Signin';
 import ProfilePage from './components/profile/ProfilePage';
 import ErrorPage from './components/ErrorPage';
 import { UserContext } from './contexts/UserContext';
+import Footer from './components/footer/Footer';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -41,6 +42,7 @@ function App() {
         <Route path="/articles/:article_id" element={<ArticlePage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
