@@ -25,7 +25,8 @@ const ArticlePage = () => {
     isLoading,
     setIsLoading,
   } = useContext(UserContext);
-  const [hasVoted, setHasVoted] = useState(false);
+  const [hasVotedLike, setHasVotedLike] = useState(false);
+  const [hasVotedDislike, setHasVotedDislike] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -46,43 +47,31 @@ const ArticlePage = () => {
   }, [article_id, setIsLoading, setErrorMsg, setErrorCode]);
 
   const handleVote = (article_id, voteType) => {
-    let num = 0
+    let num = 0;
     if (voteType === 'upvote') {
-      num = 1
+      num = !hasVotedLike ? 1 : -1;
+      setHasVotedLike(!hasVotedLike);
     }
     if (voteType === 'downvote') {
-      num = -1
+      num = !hasVotedDislike ? -1 : 1;
+      setHasVotedDislike(!hasVotedDislike);
     }
-    if (!hasVoted) {
-      setArticle((currentArticle) => ({
-        ...currentArticle,
-        votes: currentArticle.votes + 1,
-      }));
 
-      patchArticleById(article_id, num)
-        .then(() => {
-          setHasVoted(true);
-        })
-        .catch(({ response: { data, status } }) => {
-          setErrorMsg(data.msg);
-          setErrorCode(status);
-          setIsLoading(false);
-        });
-    } else {
-      setArticle((currentArticle) => ({
-        ...currentArticle,
-        votes: currentArticle.votes - 1,
-      }));
-      patchArticleById(article_id, num)
-        .then(() => {
-          setHasVoted(false);
-        })
-        .catch(({ response: { data, status } }) => {
-          setErrorMsg(data.msg);
-          setErrorCode(status);
-          setIsLoading(false);
-        });
-    }
+    const updatedVotes = article.votes + num;
+
+    setArticle((currentArticle) => ({
+      ...currentArticle,
+      votes: updatedVotes,
+    }));
+
+    patchArticleById(article_id, num)
+      .then(() => {})
+      .catch(({ response: { data, status } }) => {
+        setErrorMsg(data.msg);
+        setErrorCode(status);
+        setIsLoading(false);
+        setHasVoted(!hasVoted);
+      });
   };
 
   if (isLoading) {
@@ -111,25 +100,37 @@ const ArticlePage = () => {
       </p>
       <div className={styles['vote-section']}>
         <button
-          className={styles.voteButton}
+          className={styles.likeButton}
           onClick={() => handleVote(article.article_id, 'upvote')}
-          disabled={hasVoted}
         >
           <FontAwesomeIcon icon={faThumbsUp} className={styles['thumbs']} />
-          <span aria-label="vote this article"> Add likes</span>
+          <span aria-label="like this article">
+            {hasVotedLike ? (
+              <span className={styles.undo} aria-label="undo">
+                Undo
+              </span>
+            ) : (
+              'Like'
+            )}
+          </span>
         </button>
-        {hasVoted && (
-          <button
-            className={styles.undoButton}
-            onClick={() => handleVote(article.article_id, 'downvote')}
-            disabled={!hasVoted}
-          >
-            <FontAwesomeIcon icon={faThumbsDown} className={styles['thumbs']} />
-            <span aria-label="undo your vote"> Undo</span>
-          </button>
-        )}
-        <p>Likes: {article.votes}</p>
-      </div>
+        <button
+          className={styles.dislikeButton}
+          onClick={() => handleVote(article.article_id, 'downvote')}
+        >
+          <FontAwesomeIcon icon={faThumbsDown} className={styles['thumbs']} />
+          <span aria-label="dislike this article">
+            {hasVotedDislike ? (
+              <span className={styles.undo} aria-label="undo">
+                Undo
+              </span>
+            ) : (
+              'Dislike'
+            )}
+          </span>
+        </button>
+        </div>
+        <p>Total votes: {article.votes}</p>
       <hr />
       <Comments
         comments={comments}
