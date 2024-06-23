@@ -85,6 +85,48 @@
 
 @media (max-width: 768px) {
   .formContainer {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .formGroup {
+    padding: 2vw;
+    margin-bottom: 2vw;
+  }
+
+  .formGroup textarea {
+    height: 20vw;
+  }
+
+  .button {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .formContainer {
+    max-width: 100%;
     padding: 10px;
+  }
+
+  .formGroup {
+    padding: 1.5vw;
+    margin-bottom: 1.5vw;
+    width: 100%;
+  }
+
+  .formGroup textarea {
+    height: 30vw;
+  }
+
+  .button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .formContainer h3 {
+    font-size: 1.2rem;
+    margin-bottom: 2vw;
   }
 }

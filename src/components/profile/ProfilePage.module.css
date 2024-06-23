@@ -119,3 +119,82 @@
   height: auto;
   margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+  .profile {
+    grid-template-areas:
+      'profileContainer'
+      'articlesContainer'
+      'formContainer';
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    width: 95%;
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .profileContainer {
+    width: 100%;
+    padding: 3vw;
+  }
+
+  .articlesContainer {
+    padding: 15px;
+  }
+
+  .formContainer {
+    padding: 15px;
+  }
+
+  .profileImage {
+    width: 30vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile {
+    grid-template-areas:
+      'profileContainer'
+      'articlesContainer'
+      'formContainer';
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    width: 100%;
+    padding: 5px;
+    gap: 10px;
+  }
+
+  .profileContainer {
+    width: 100%;
+    padding: 2vw;
+  }
+
+  .articlesContainer {
+    padding: 10px;
+  }
+
+  .formContainer {
+    padding: 10px;
+  }
+
+  .profileImage {
+    width: 40vw;
+  }
+
+  .articlesContainer h4 {
+    font-size: 1.2rem;
+  }
+
+  .articleCard h2 {
+    font-size: 0.875rem;
+  }
+
+  .articleCard span {
+    font-size: 0.75rem;
+  }
+
+  .deleteButton {
+    font-size: 0.75rem;
+    padding: 3px 7px;
+  }
+}
