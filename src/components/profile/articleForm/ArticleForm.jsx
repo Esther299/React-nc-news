@@ -1,13 +1,14 @@
-import { useContext, useState } from 'react';
-import { UserContext } from '../../../contexts/UserContext';
-import styles from './ArticleForm.module.css';
-import { postArticle } from '../../../api';
+import { useContext, useState } from "react";
+import { UserContext } from "../../../contexts/UserContext";
+import styles from "./ArticleForm.module.css";
+import { postArticle } from "../../../api";
 
 function ArticleForm({ topics, setArticles }) {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [topic, setTopic] = useState('');
-  const [image, setImage] = useState(null);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [topic, setTopic] = useState("");
+  const [image, setImage] = useState("");
+  const [imageInputVisible, setImageInputVisible] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { selectedUser, errorMsg, setErrorMsg, errorCode, setErrorCode } =
     useContext(UserContext);
@@ -15,7 +16,7 @@ function ArticleForm({ topics, setArticles }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setErrorMsg('');
+    setErrorMsg("");
     setErrorCode(null);
     if (selectedUser) {
       setIsSubmitting(true);
@@ -29,10 +30,11 @@ function ArticleForm({ topics, setArticles }) {
       })
         .then((newComment) => {
           setArticles((currentComments) => [newComment, ...currentComments]);
-          setTitle('');
-          setBody('');
-          setTopic('');
-          setImage('');
+          setTitle("");
+          setBody("");
+          setTopic("");
+          setImage("");
+          setImageInputVisible(true);
           setIsSubmitting(false);
         })
         .catch(({ response: { data, status } }) => {
@@ -46,19 +48,19 @@ function ArticleForm({ topics, setArticles }) {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'title') {
+    if (name === "title") {
       setTitle(value);
-    } else if (name === 'body') {
+    } else if (name === "body") {
       setBody(value);
-    } else if (name === 'topic') {
+    } else if (name === "topic") {
       setTopic(value);
+    } else if (name === "article_img_url") {
+      setImage(value);
     }
   };
 
-  const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
-    }
+  const handleImageToggle = () => {
+    setImageInputVisible(!imageInputVisible);
   };
 
   const capitalizeFirstLetter = (string) => {
@@ -109,19 +111,39 @@ function ArticleForm({ topics, setArticles }) {
           </select>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="article_img_url">Article Image:</label>
-          <input
-            type="file"
-            id="article_img_url"
-            name="article_img_url"
-            onChange={onImageChange}
-          />
-          {image && (
-            <img
-              src={image}
-              alt="Article Preview"
-              className={styles.imagePreview}
-            />
+          <label htmlFor="article_img_url">Image URL:</label>
+          {imageInputVisible ? (
+            <>
+              <input
+                type="text"
+                id="article_img_url"
+                name="article_img_url"
+                value={image}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                onClick={handleImageToggle}
+                className={styles.uploadButton}
+              >
+                Upload
+              </button>
+            </>
+          ) : (
+            <>
+              <img
+                src={image}
+                alt="Article Preview"
+                className={styles.imagePreview}
+              />
+              <button
+                type="button"
+                onClick={handleImageToggle}
+                className={styles.changeButton}
+              >
+                Change
+              </button>
+            </>
           )}
         </div>
         <button
@@ -129,7 +151,7 @@ function ArticleForm({ topics, setArticles }) {
           className={styles.submitButton}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Submitting...' : 'Submit'}
+          {isSubmitting ? "Submitting..." : "Submit"}
         </button>
         {errorCode && (
           <p className={styles.error}>

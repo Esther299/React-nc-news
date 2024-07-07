@@ -1,8 +1,9 @@
 .profile {
   display: grid;
   grid-template-areas:
-    'profileContainer articlesContainer'
-    'formContainer formContainer';
+    "profileTitle profileTitle"
+    "profileContainer articlesContainer"
+    "formContainer formContainer";
   grid-template-columns: 1fr 2fr;
   grid-template-rows: auto 1fr;
   gap: 20px;
@@ -13,6 +14,17 @@
   justify-content: center;
 }
 
+h1 {
+  margin: 4vw;
+  font-size: 5rem;
+  text-align: center;
+}
+
+.profile h1 {
+  grid-area: profileTitle;
+  align-self: center;
+  order: -1;
+}
 
 .profileContainer {
   grid-area: profileContainer;
@@ -20,7 +32,7 @@
   border-radius: 5px;
   padding: 4vw;
   height: auto;
-  width: 50vw;
+  width: 100%;
   background-color: #f9f9f9;
   display: flex;
   flex-direction: column;
@@ -123,9 +135,10 @@
 @media (max-width: 768px) {
   .profile {
     grid-template-areas:
-      'profileContainer'
-      'articlesContainer'
-      'formContainer';
+      "profileTitle"
+      "profileContainer"
+      "articlesContainer"
+      "formContainer";
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     width: 95%;
@@ -154,14 +167,19 @@
 @media (max-width: 480px) {
   .profile {
     grid-template-areas:
-      'profileContainer'
-      'articlesContainer'
-      'formContainer';
+      "profileTitle"
+      "profileContainer"
+      "articlesContainer"
+      "formContainer";
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     width: 100%;
     padding: 5px;
     gap: 10px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
   }
 
   .profileContainer {

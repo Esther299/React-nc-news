@@ -1,8 +1,8 @@
-import { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../../contexts/UserContext';
-import { deleteArticleById, getArticles } from '../../api';
-import ArticleForm from './articleForm/ArticleForm';
-import styles from './ProfilePage.module.css';
+import { useContext, useState, useEffect } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { deleteArticleById, getArticles } from "../../api";
+import ArticleForm from "./articleForm/ArticleForm";
+import styles from "./ProfilePage.module.css";
 
 function ProfilePage({ topics }) {
   const {
@@ -15,11 +15,11 @@ function ProfilePage({ topics }) {
     setErrorCode,
   } = useContext(UserContext);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [deleteMessage, setDeleteMessage] = useState('');
+  const [deleteMessage, setDeleteMessage] = useState("");
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     getArticles()
       .then((fetchedArticles) => {
         setArticles(fetchedArticles);
@@ -33,18 +33,18 @@ function ProfilePage({ topics }) {
   }, []);
 
   const handleDelete = (article_id) => {
-    setErrorMsg('');
+    setErrorMsg("");
     setErrorCode(null);
     setIsDeleting(true);
     deleteArticleById(article_id)
       .then(() => {
         setIsDeleting(false);
-        setDeleteMessage('Article deleted successfully!');
+        setDeleteMessage("Article deleted successfully!");
         setArticles((currentArticles) =>
           currentArticles.filter((article) => article.article_id !== article_id)
         );
         setTimeout(() => {
-          setDeleteMessage('');
+          setDeleteMessage("");
         }, 5000);
       })
       .catch((error) => {
@@ -53,7 +53,7 @@ function ProfilePage({ topics }) {
           setErrorMsg(error.response.data.msg);
           setErrorCode(error.response.status);
         } else {
-          setErrorMsg('An error occurred while deleting the article.');
+          setErrorMsg("An error occurred while deleting the article.");
           setErrorCode(null);
         }
       });
@@ -73,15 +73,18 @@ function ProfilePage({ topics }) {
   if (!selectedUser) {
     return (
       <div className={styles.noUserProfile}>
-        <h3>Username:</h3>
-        <p>none</p>
-        <h3>Name:</h3>
-        <p>none</p>
-        <img
-          className={styles.noUserImage}
-          src="default-profile-picture.svg.png"
-          alt="default avatar"
-        />
+        <h1>Your Profile</h1>
+        <div className={styles.profileContainer}>
+          <h3>Username:</h3>
+          <p>none</p>
+          <h3>Name:</h3>
+          <p>none</p>
+          <img
+            className={styles.noUserImage}
+            src="default-profile-picture.svg.png"
+            alt="default avatar"
+          />
+        </div>
       </div>
     );
   }
@@ -112,8 +115,8 @@ function ProfilePage({ topics }) {
                 {article.title}
                 <br />
                 <span>
-                  {' '}
-                  Posted: {article.created_at.substring(0, 10)} at{' '}
+                  {" "}
+                  Posted: {article.created_at.substring(0, 10)} at{" "}
                   {article.created_at.substring(11, 19)}
                 </span>
               </h2>
@@ -123,7 +126,7 @@ function ProfilePage({ topics }) {
                 disabled={isDeleting}
                 className={styles.deleteButton}
               >
-                {isDeleting ? 'Deleting...' : 'Delete'}
+                {isDeleting ? "Deleting..." : "Delete"}
               </button>
               {errorCode && (
                 <p className={styles.error}>

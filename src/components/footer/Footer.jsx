@@ -76,7 +76,7 @@ function Footer() {
 
       <div className={styles.footerBottom}>
         <p>
-          &copy; 2024 Company Name. All Rights Reserved.
+          &copy; 2024 Esther Gines Northcoders. All Rights Reserved.
         </p>
       </div>
     </footer>
