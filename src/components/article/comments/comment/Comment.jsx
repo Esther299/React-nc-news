@@ -129,4 +129,5 @@ function Comment({ setDeleteMessage, comment: initialComment, setComments }) {
     </div>
   );
 }
+
 export default Comment;

@@ -6,7 +6,7 @@
   margin-top: 2vw;
 }
 
-h3 {
+.title {
   font-size: 1.7rem;
   margin-bottom: 1vw;
 }
@@ -31,7 +31,7 @@ h3 {
     margin-top: 3vw;
   }
 
-  h3 {
+  .title {
     font-size: 1.5rem;
     margin-bottom: 0.8vw;
   }
@@ -46,7 +46,7 @@ h3 {
     margin-top: 2vw;
   }
 
-  h3 {
+  .title {
     font-size: 2rem;
     margin-bottom: 1vw;
   }

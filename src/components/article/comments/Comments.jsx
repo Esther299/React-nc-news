@@ -24,9 +24,9 @@ function Comments({ articleId, comments, setComments }) {
 
   return (
     <div className={styles.comments}>
-      <h3>Comments</h3>
+      <h3 className={styles.title}>Comments</h3>
       {deleteMessage && (
-        <p className={styles['delete-message']}>{deleteMessage}</p>
+        <p className={styles["delete-message"]}>{deleteMessage}</p>
       )}
       <div className={styles.formContainer}>
         <CommentForm setComments={setComments} articleId={articleId} />

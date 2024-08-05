@@ -43,19 +43,21 @@ function CommentForm({ articleId, setComments }) {
           className={styles.textarea}
         ></textarea>
         <br />
-        <p>Commenting as: {selectedUser.username}</p>
+        <p className={styles.author}>
+          Commenting as: {selectedUser.username}
+        </p>
         <button type="submit" disabled={isSubmitting} className={styles.button}>
-          {isSubmitting ? 'Adding...' : 'Add'}
+          {isSubmitting ? "Adding..." : "Add"}
         </button>
         {errorCode && (
-          <p className='error'>
+          <p className="error">
             {errorCode}: {errorMsg}
           </p>
         )}
       </form>
     </div>
   ) : (
-    <p>Log in to post a comment</p>
+    <p className={styles.message}>Log in to post a comment</p>
   );
 }
 

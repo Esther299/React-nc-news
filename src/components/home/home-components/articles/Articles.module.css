@@ -1,21 +1,21 @@
-.list{
-  list-style-type: none;
-  padding: 0;
+
+.list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-  gap: 20px;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+  margin: 0;
 }
 
 @media (max-width: 768px) {
   .list {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
+    grid-template-columns: auto auto auto;
   }
 }
 
 @media (max-width: 480px) {
   .list {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
+    gap: 5px;
   }
 }

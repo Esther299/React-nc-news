@@ -90,8 +90,8 @@ const ArticlePage = () => {
 
   return (
     <div className={styles.article}>
-      <h2>{article.title}</h2>
-      <p>{article.body}</p>
+      <h2 className={styles.title}>{article.title}</h2>
+      <p className={styles.body}>{article.body}</p>
       <img src={article.article_img_url} alt={article.title} />
       <h3 className={styles.author}>By {article.author}</h3>
       <p className={styles.substring}>

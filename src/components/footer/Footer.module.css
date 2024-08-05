@@ -1,111 +1,115 @@
 .footer {
-    background-color: #333;
-    color: #fff;
-    padding: 2vw 0;
-    text-align: center;
+  background-color: #1e1e1e;
+  color: #b3b3b3;
+  padding: 3vw 2vw;
+  text-align: center;
 }
 
 .footerContent {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footerSection {
-    margin: 1vw 2vw;
-    flex: 1 1 20vw;
+  flex: 1 1 25%;
+  margin: 1.5vw;
 }
 
 .logo {
-    width: 20vw;
+  width: 20vw;
 }
 
 .footerSection h2 {
-    margin-bottom: 1vw;
-    font-size: 2rem;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #b3b3b3;
+  padding-bottom: 0.5rem;
 }
 
 .footerSection p, .footerSection a {
-    margin: 5px 0;
-    color: #fff;
-    text-decoration: none;
+  margin: 0.5rem 0;
+  color: #b3b3b3;
+  text-decoration: none;
 }
 
 .footerSection a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .links {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .links li {
-    margin: 5px 0;
+  margin: 0.5rem 0;
 }
 
 .socialIcon {
-    margin: 0 1vw;
-    color: #fff;
-    font-size: 24px;
-    padding: 1vw;
+  padding: 1vw;
+  color: #b3b3b3;
+  font-size: 20px;
 }
 
+.socialIcon:hover {
+  color: #23ff69;
+}
 
 .footerBottom {
-    margin-top: 2vw;
-    font-size: 1rem;
+  margin-top: 2vw;
+  font-size: 0.9rem;
+  border-top: 1px solid #333;
+  padding-top: 1vw;
 }
 
 @media (max-width: 768px) {
-    .footerContent {
-        flex-direction: column;
-        align-items: center;
-    }
+  .footerContent {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .footerSection {
-        flex: 1 1 80vw;
-        margin: 2vw 0;
-    }
+  .footerSection {
+    flex: 1 1 90%;
+    margin: 1.5vw 0;
+  }
 
-    .logo {
-        width: 50vw;
-    }
+  .logo {
+    width: 120px;
+  }
 
-    .footerSection h2 {
-        font-size: 1.5rem;
-    }
+  .footerSection h2 {
+    font-size: 1.4rem;
+  }
 
-    .socialIcon {
-        font-size: 20px;
-        padding: 2vw;
-    }
+  .socialIcon {
+    font-size: 18px;
+    margin: 0.5rem;
+  }
 
-    .footerBottom {
-        font-size: 0.9rem;
-    }
+  .footerBottom {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .footerSection h2 {
-        font-size: 1.2rem;
-    }
+  .footerSection h2 {
+    font-size: 1.2rem;
+  }
 
-    .emailInput {
-        width: 90%;
-    }
+  .footerSection p, .footerSection a {
+    font-size: 0.9rem;
+  }
 
-    .signupButton {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-    }
+  .socialIcon {
+    font-size: 16px;
+    margin: 0.5rem;
+  }
 
-    .socialIcon {
-        font-size: 18px;
-        padding: 2.5vw;
-    }
-
-    .footerBottom {
-        font-size: 0.8rem;
-    }
+  .footerBottom {
+    font-size: 0.7rem;
+  }
 }

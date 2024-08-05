@@ -1,188 +1,164 @@
 .article {
-  padding: 3vw;
   background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 3vw auto;
-  max-width: 70%;
-  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 2vw;
+  margin: 2vw auto;
+  max-width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
-.article h2 {
-  font-size: 2rem;
-  margin: 2vw;
+.article .title {
+  font-size: 2.4rem;
+  color: #333;
+  margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
-.article p {
+.article .body {
   font-size: 1rem;
+  color: #333;
   line-height: 1.6;
-  margin-bottom: 1.3vw;
+  margin-bottom: 1rem;
 }
 
 .article img {
-  width: 80%;
+  width: 100%;
   height: auto;
-  border-radius: 5px;
-  margin: 1vw auto;
-  display: flex;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
-.author {
-  font-size: 1.5rem;
-  color: #007bff;
-  margin-bottom: 2vw;
+.article .author {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.5rem;
 }
 
 .article .substring {
   font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 1vw;
+  color: #777;
+  margin-bottom: 1rem;
 }
 
-.article .vote-section {
+.vote-section {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin: 1rem 0;
 }
 
-.article .vote-section .thumbs {
+.vote-section button {
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  transition: color 0.3s ease;
+  margin-right: 10px;
+}
+
+.vote-section .likeButton {
+  background-color: #2fbc00;
+}
+
+.vote-section .likeButton:hover {
+  color: #98ff91;
+}
+
+.vote-section .dislikeButton {
+  background-color: #bc0000;
+}
+
+.vote-section .dislikeButton:hover {
+  color: #fd6a6a;
+}
+
+.vote-section .thumbs {
+  align-items: center;
+  margin: 0.5vw;
   color: black;
   margin-left: 5px;
   margin-right: 10px;
 }
 
-.article .vote-section button {
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-right: 10px;
-}
-
-.article .likeButton {
-  background-color: #28a745;
-  color: #fff;
-}
-
-.article .likeButton:hover {
-  background-color: #218838;
-}
-
-.article .dislikeButton {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.article .dislikeButton:hover {
-  background-color: #c82333;
-}
 .article .undo {
-  text-decoration: wavy;
   color: #000;
+  font-weight: bold;
 }
 
-.article .vote-section button span {
+.vote-section button span {
   margin-left: 5px;
 }
-.article hr {
-  margin: 20px 0;
-  border: none;
-  border-top: 1px solid #ccc;
+
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 2rem 0;
 }
 
-.article .link {
-  text-decoration: none;
-}
-
-.article .link button {
-  background-color: #007bff;
-  color: #fff;
+.link button {
+  background-color: #007bbc;
+  color: white;
   border: none;
-  padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.article .link button:hover {
-  background-color: #0056b3;
+.link button:hover {
+  background-color: #005f8d;
 }
 
 @media (max-width: 768px) {
   .article {
-    padding: 5vw;
-    max-width: 90%;
+    padding: 1.5vw;
+    margin: 1.5vw auto;
   }
 
   .article h2 {
-    font-size: 1.8rem;
-    margin: 3vw 0;
+    font-size: 2rem;
   }
 
   .article p {
-    font-size: 0.95rem;
-    margin-bottom: 1.5vw;
-  }
-
-  .article img {
-    width: 100%;
-  }
-
-  .author {
-    font-size: 1.3rem;
-    margin-bottom: 3vw;
-  }
-
-  .article .substring {
-    font-size: 0.8rem;
-    margin-bottom: 1.5vw;
-  }
-
-  .article .vote-section button {
-    padding: 8px 16px;
     font-size: 0.9rem;
   }
 
-  .article .link button {
-    padding: 8px 16px;
+  .vote-section button {
     font-size: 0.9rem;
+  }
+
+  .vote-section .thumbs {
+    font-size: 1rem;
   }
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 480px) {
   .article {
-    padding: 2vw;
-    max-width: 60%;
+    padding: 1vw;
+    margin: 1vw auto;
   }
 
   .article h2 {
-    font-size: 2.5rem;
-    margin: 1.5vw 0;
+    font-size: 1.6rem;
   }
 
   .article p {
-    font-size: 1.1rem;
-    margin-bottom: 1.2vw;
+    font-size: 0.8rem;
   }
 
-  .author {
-    font-size: 1.6rem;
-    margin-bottom: 2vw;
+  .vote-section button {
+    font-size: 0.8rem;
   }
 
-  .article .substring {
+  .vote-section .thumbs {
     font-size: 0.9rem;
-    margin-bottom: 1vw;
   }
 
-  .article .vote-section button {
-    padding: 10px 20px;
-    font-size: 1rem;
-  }
-
-  .article .link button {
-    padding: 10px 20px;
-    font-size: 1rem;
+  .link button {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
   }
 }

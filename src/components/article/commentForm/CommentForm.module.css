@@ -22,8 +22,12 @@
   line-height: 1.5;
 }
 
-.form p {
-  margin-top: 1vw;
+.form .author {
+  margin: 1vw;
+  font-style: italic;
+}
+
+.message {
   font-style: italic;
 }
 

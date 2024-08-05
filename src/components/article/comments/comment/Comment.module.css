@@ -1,29 +1,32 @@
 .card {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 2vw;
-  margin-top: 1.5vw;
-}
-
-.card p {
-  margin-bottom: 0.6vw;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5vw;
+  margin: 1.5vw 0;
+  max-width: 90%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 .comment-body {
-  font-size: 1.1rem;
-  line-height: 1.4;
+  font-size: 1.3rem;
   color: #333;
+  line-height: 1.6;
+  margin-bottom: 1rem;
 }
 
 .comment-author {
+  font-size: 0.7rem;
+  color: #555;
+  margin-bottom: 0.5vw;
   font-weight: bold;
-  color: #007bff;
 }
 
 .comment-date {
-  font-style: italic;
-  color: #666;
+  font-size: 0.6rem;
+  color: #777;
+  margin-bottom: 1rem;
 }
 
 .vote-section {
@@ -95,38 +98,59 @@
 
 @media (max-width: 768px) {
   .card {
-    padding: 3vw;
-    margin-top: 2vw;
-  }
-
-  .card p {
-    margin-bottom: 0.8vw;
-  }
-
-  .comment-body {
-    font-size: 1rem;
-  }
-
-  .delete-button {
-    width: 30%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .card {
-    padding: 2vw;
-    margin-top: 1.5vw;
-  }
-
-  .card p {
-    margin-bottom: 0.6vw;
+    padding: 1vw;
+    margin: 1vw 0;
   }
 
   .comment-body {
     font-size: 1.1rem;
   }
 
+  .comment-author {
+    font-size: 0.65rem;
+  }
+
+  .comment-date {
+    font-size: 0.5rem;
+  }
+
+  .vote-section button {
+    font-size: 0.9rem;
+  }
+
+  .vote-section .thumbs {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 0.8vw;
+    margin: 0.8vw 0;
+  }
+
+  .comment-body {
+    font-size: 0.8rem;
+  }
+
+  .comment-author {
+    font-size: 0.8rem;
+  }
+
+  .comment-date {
+    font-size: 0.7rem;
+  }
+
+  .vote-section button {
+    font-size: 0.8rem;
+  }
+
+  .vote-section .thumbs {
+    font-size: 0.9rem;
+  }
+
   .delete-button {
-    width: 15%;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
   }
 }

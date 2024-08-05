@@ -55,7 +55,6 @@ function Home({ articles, setArticles }) {
 
   return (
     <main className={styles['main-content']}>
-      <h1>All the {topic} articles here:</h1>
       <div className={styles['sort-controls']}>
         <label>
           Sort by:{' '}
@@ -87,4 +86,5 @@ function Home({ articles, setArticles }) {
     </main>
   );
 }
+
 export default Home;
