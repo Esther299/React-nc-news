@@ -65,4 +65,4 @@ Ensure you have the following installed on your local machine:
 
 ## Contact
 
-For any questions or issues, please contact Esther at esthergc_2@hotmail.com.
+For any questions or issues, please contact Esther on github account Esther299.
